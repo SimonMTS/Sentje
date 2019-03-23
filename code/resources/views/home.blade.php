@@ -3,20 +3,18 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-10">
+
             <div class="card">
-                <div class="card-header">Dashboard</div>
-
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    You are logged in!
+                    <h5 class="card-title">Jouw tekst</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Hoeveelheid geld</h6>
+                    <p class="card-text">Aantal betaald</p>
+                    <a href="#" class="card-link">Details</a>
+                    <a href="#" class="card-link">Another link</a>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
