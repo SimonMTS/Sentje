@@ -14,21 +14,21 @@
                 </div>
             @endif
 
-            <h1 class="display-4 mb-5">Gegevens aanpassen</h1>
+            <h1 class="display-4 mb-5">{{ __('text.bankDelete') }}</h1>
 
             <form method="POST" action="<?= URL::to('/profile/'.$user['id']); ?>">
                 @csrf
 
                 <div class="form-group row">
                     <div class="col-lg-4 col-md-5">
-                        <label>Naam</label>
+                        <label>{{ __('text.name') }}</label>
                         <input type="text" name="name" class="form-control" value="{{ $user['name'] }}" required>
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <div class="col-lg-4 col-md-5">
-                        <label>Email</label>
+                        <label>{{ __('text.email') }}</label>
                         <input type="text" name="email" class="form-control" value="{{ $user['email'] }}" required>
                     </div>
                 </div>
@@ -36,19 +36,19 @@
                 <div class="form-group row">
                     <div class="col-lg-4 col-md-5">
                         <hr class="mt-2">
-                        <label>Wachtwoord</label>
+                        <label>{{ __('text.password') }}</label>
                         <input type="password" name="password" class="form-control">
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <div class="col-lg-4 col-md-5">
-                        <label>Wachtwoord herhalen</label>
+                        <label>{{ __('text.passwordRepeat') }}</label>
                         <input type="password" name="password_confirm" class="form-control">
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-success">Aanpassen</button>
+                <button type="submit" class="btn btn-success">{{ __('text.bankEdit') }}</button>
             </form>
 
         </div>

@@ -2,8 +2,11 @@ $( document ).ready(function() {
 
     jQuery.validator.addMethod("IBAN", function(value, element) {
         return /[a-zA-Z]{2}[0-9]{2}[a-zA-Z0-9]{4}[0-9]{7}([a-zA-Z0-9]?){0,16}/.test(value.replace(/\s/g, ''));
-    }, "Voer een correct IBAN nummer in.");
-      
+    }, $("#correctIBAN").val());
+
+    jQuery.extend(jQuery.validator.messages, {
+        required: $("#fieldMandatory").val()
+    });
     
     $('.ibanform').validate({
         rules: {
@@ -22,10 +25,21 @@ $( document ).ready(function() {
         },
         unhighlight: function (element, errorClass, validClass) {
             $(element).removeClass('is-invalid');
-        },
-        messages: {
-            required: "Dit veld is verplicht."
         }
+    });
+
+
+    $("#change_lang_en").click(function(){
+        document.cookie = "locale=en; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/";
+        location.reload();
+    });
+    $("#change_lang_nl").click(function(){
+        document.cookie = "locale=nl; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/";
+        location.reload();
+    });
+    $("#change_lang_de").click(function(){
+        document.cookie = "locale=de; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/";
+        location.reload();
     });
 
 });

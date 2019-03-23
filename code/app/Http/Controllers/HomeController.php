@@ -25,7 +25,22 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $requests[0] = [
+            'amount' => '€10,50',
+            'text' => 'Voor de film',
+            'numberPaid' => [0, 3],
+            'date' => '23/03/2019'
+        ];
+        $requests[1] = [
+            'amount' => '£50,00',
+            'text' => 'Van het eten gisteren',
+            'numberPaid' => [1, 3],
+            'date' => '14/03/2019'
+        ];
+
+        return view('home', [
+            'requests' => $requests
+        ]);
     }
 
 
@@ -58,7 +73,7 @@ class HomeController extends Controller
 
         $user->save();
 
-        $request->session()->flash('successUser', ['Gelukt!', ' je gegevens zijn aangepast.']);
+        $request->session()->flash('successUser', [__('text.success'), __('text.dataEdited')]);
         return redirect('profile/'.$user->id);
     }
 }

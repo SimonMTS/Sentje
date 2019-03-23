@@ -14,18 +14,18 @@
                 </div>
             @endif
 
-            <h1 class="display-4">Mijn bank rekeningen</h1>
+            <h1 class="display-4">{{ __('text.myBankAccounts') }}</h1>
             <p class="lead">{{ Auth::user()->name }}</p>
 
-            <a class="btn btn-outline-success float-right mb-2" href="<?= URL::to('/accounts/add'); ?>">Rekening toevoegen</a>
+            <a class="btn btn-outline-success float-right mb-2" href="<?= URL::to('/accounts/add'); ?>">{{ __('text.bankAccountAdd') }}</a>
 
             <table class="table table-striped mt-5">
                 <thead>
                     <tr>
                         <th style="width: 10%" scope="col">#</th>
                         <th style="width: 70%" scope="col">IBAN</th>
-                        <th style="width: 10%" scope="col">Edit</th>
-                        <th style="width: 10%" scope="col">Delete</th>
+                        <th style="width: 10%" scope="col">{{ __('text.bankEdit') }}</th>
+                        <th style="width: 10%" scope="col">{{ __('text.bankDelete') }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -43,17 +43,17 @@
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title">Account verwijderen</h5>
+                                                <h5 class="modal-title">{{ __('text.bankAccountDelete') }}</h5>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                Weet je zeker dat je de rekening met nummer <br>"{{ $account['IBAN'] }}" wil verwijderen?
+                                            {{ __('text.uSureDelete') }}<br>"{{ $account['IBAN'] }}"{{ __('text.uSureDelete2') }}
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-link" data-dismiss="modal">Nee, toch niet</button>
-                                                <button type="button" class="btn btn-danger" onclick="event.preventDefault(); document.getElementById('delete-account-form{{ $loop->index + 1 }}').submit();">Ja, verwijderen</button>
+                                                <button type="button" class="btn btn-link" data-dismiss="modal">{{ __('text.noNevermind') }}</button>
+                                                <button type="button" class="btn btn-danger" onclick="event.preventDefault(); document.getElementById('delete-account-form{{ $loop->index + 1 }}').submit();">{{ __('text.yesDelete') }}</button>
                                                 <form id="delete-account-form{{ $loop->index + 1 }}" action="<?= URL::to('/accounts/delete/' . $account['id']); ?>" method="POST" style="display: none;">
                                                     @csrf
                                                 </form>

@@ -5,14 +5,14 @@
     <div class="row">
         <div class="col pt-5">
 
-            <h1 class="display-4 mb-5">Bank rekening aanpassen</h1>
+            <h1 class="display-4 mb-5">{{ __('text.bankAccountEdit') }}</h1>
 
             <form method="POST" action="<?= URL::to('/accounts/edit/'.$account['id']); ?>" class="ibanform" novalidate>
                 @csrf
 
                 <div class="form-group row">
                     <div class="col-lg-4 col-md-5">
-                        <label>Naam</label>
+                        <label>{{ __('text.name') }}</label>
                         <input disabled type="text"class="form-control" placeholder="{{ Auth::user()->name }}">
                     </div>
                 </div>
@@ -32,7 +32,7 @@
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-success">Aanpassen</button>
+                <button type="submit" class="btn btn-success">{{ __('text.bankEdit') }}</button>
             </form>
 
         </div>

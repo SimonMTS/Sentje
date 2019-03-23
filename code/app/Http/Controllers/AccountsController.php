@@ -9,7 +9,7 @@ class AccountsController extends Controller
 
     public function index()
     {
-        $accounts = \App\Account::all();
+        $accounts = \App\Account::where('user_id', auth()->user()->id)->get();
 
         return view('accounts.index', [
             'accounts' => $accounts
@@ -34,7 +34,7 @@ class AccountsController extends Controller
 
         $account->save();
 
-        $request->session()->flash('success', ['Gelukt!', ' je rekening is toegevoegd.']);
+        $request->session()->flash('success', [__('text.success'), __('text.accountAdded')]);
         return redirect('accounts');
     }
 
@@ -60,7 +60,7 @@ class AccountsController extends Controller
         $account->IBAN = $request->IBAN;
         $account->save();
 
-        $request->session()->flash('success', ['Gelukt!', ' je rekening is aangepast.']);
+        $request->session()->flash('success', [__('text.success'), __('text.accountEdited')]);
         return redirect('accounts');
     }
 
@@ -72,7 +72,7 @@ class AccountsController extends Controller
             $account->delete();
         }
         
-		$request->session()->flash('success', ['Gelukt!', ' je rekening is verwijdert.']);
+		$request->session()->flash('success', [__('text.success'), __('text.accountDeleted')]);
 		return redirect('accounts');
 	}
 

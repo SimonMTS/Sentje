@@ -40,7 +40,7 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                         <div class="navbar-nav">
-                            <a class="nav-item nav-link" href="<?= URL::to('/accounts'); ?>">Rekeningen</a>
+                            <a class="nav-item nav-link" href="<?= URL::to('/accounts'); ?>">{{ __('text.accounts') }}</a>
                         </div>
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item dropdown">
@@ -49,10 +49,15 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="<?= URL::to('/profile/'.Auth::user()->id); ?>">Profiel</a>
+                                    <a href="javascript:void(0)" id="change_lang_en" class="flag-icon <?= ($_COOKIE['locale'] === 'en' ? 'flag-active' : '') ?>" style="text-decoration: none !important;"> <img src="<?= URL::to('/svg/united-kingdom.svg'); ?>"> </a>
+                                    <a href="javascript:void(0)" id="change_lang_nl" class="flag-icon <?= ($_COOKIE['locale'] === 'nl' ? 'flag-active' : '') ?>" style="text-decoration: none !important;"> <img src="<?= URL::to('/svg/netherlands.svg'); ?>"> </a>
+                                    <a href="javascript:void(0)" id="change_lang_de" class="flag-icon <?= ($_COOKIE['locale'] === 'de' ? 'flag-active' : '') ?>" style="text-decoration: none !important;"> <img src="<?= URL::to('/svg/germany.svg'); ?>"> </a>
+                                    
                                     <div class="dropdown-divider"></div>
+
+                                    <a class="dropdown-item" href="<?= URL::to('/profile/'.Auth::user()->id); ?>">{{ __('text.profile') }}</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                        Uitloggen
+                                    {{ __('text.logout') }}
                                     </a>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
@@ -61,11 +66,21 @@
                             </li>
                         </ul>
                     </div>
+                @else
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item dropdown">
+                            <a href="javascript:void(0)" id="change_lang_en" class="flag-icon <?= ($_COOKIE['locale'] === 'en' ? 'flag-active' : '') ?>" style="text-decoration: none !important;"> <img src="<?= URL::to('/svg/united-kingdom.svg'); ?>"> </a>
+                            <a href="javascript:void(0)" id="change_lang_nl" class="flag-icon <?= ($_COOKIE['locale'] === 'nl' ? 'flag-active' : '') ?>" style="text-decoration: none !important;"> <img src="<?= URL::to('/svg/netherlands.svg'); ?>"> </a>
+                            <a href="javascript:void(0)" id="change_lang_de" class="flag-icon <?= ($_COOKIE['locale'] === 'de' ? 'flag-active' : '') ?>" style="text-decoration: none !important;"> <img src="<?= URL::to('/svg/germany.svg'); ?>"> </a>                
+                        </li>
+                    </ul>
                 @endif
             </div>
         </nav>
 
         @yield('content')
 
+        <input id="correctIBAN" type="hidden" value="{{ __('text.correctIBAN') }}">
+        <input id="fieldMandatory" type="hidden" value="{{ __('text.fieldMandatory') }}">
     </body>
 </html>

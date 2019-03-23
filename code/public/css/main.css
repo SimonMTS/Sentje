@@ -1,0 +1,30 @@
+
+.flag-icon img {
+    width: 30px;
+    height: 30px;
+
+    border: 5px solid lightgray;
+    border-radius: 50%;
+}
+
+.flag-icon:first-child img {
+    margin-left: 24px
+}
+
+.flag-icon:hover img {
+    border: 0px solid white;
+    border-radius: 50%;
+}
+
+.flag-icon {
+    margin-left: 5px;
+}
+
+.flag-active img {
+    border: 2px solid lightgray;
+    border-radius: 50%;
+}
+
+.nounderline {
+    text-decoration: none !important
+}
