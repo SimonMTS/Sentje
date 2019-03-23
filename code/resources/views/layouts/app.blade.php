@@ -12,6 +12,8 @@
         <!-- Scripts -->
         <script src="{{ asset('js/jquery.min.js') }}" defer></script>
         <script src="{{ asset('js/bootstrap.min.js') }}" defer></script>
+        <script src="{{ asset('js/jquery.validate.min.js') }}" defer></script>
+        <script src="{{ asset('js/additional-methods.min.js') }}" defer></script>
         <script src="{{ asset('js/main.js') }}" defer></script>
 
         <!-- Fonts -->

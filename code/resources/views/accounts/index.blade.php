@@ -53,8 +53,8 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-link" data-dismiss="modal">Nee, toch niet</button>
-                                                <button type="button" class="btn btn-danger" onclick="event.preventDefault(); document.getElementById('delete-account-form').submit();">Ja, verwijderen</button>
-                                                <form id="delete-account-form" action="<?= URL::to('/accounts/delete/' . $account['id']); ?>" method="POST" style="display: none;">
+                                                <button type="button" class="btn btn-danger" onclick="event.preventDefault(); document.getElementById('delete-account-form{{ $loop->index + 1 }}').submit();">Ja, verwijderen</button>
+                                                <form id="delete-account-form{{ $loop->index + 1 }}" action="<?= URL::to('/accounts/delete/' . $account['id']); ?>" method="POST" style="display: none;">
                                                     @csrf
                                                 </form>
                                             </div>

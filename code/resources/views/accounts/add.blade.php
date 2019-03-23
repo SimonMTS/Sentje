@@ -7,7 +7,7 @@
 
             <h1 class="display-4 mb-5">Bank rekening toevoegen</h1>
 
-            <form method="POST" action="<?= URL::to('/accounts/add'); ?>">
+            <form method="POST" action="<?= URL::to('/accounts/add'); ?>" class="ibanform" novalidate>
                 @csrf
 
                 <div class="form-group row">
@@ -27,7 +27,7 @@
                                     <i class="fas fa-university"></i>
                                 </span>
                             </div>
-                            <input placeholder="NL01 BANK 0123 4567 89" id="IBAN" type="text" class="form-control" name="IBAN" value="{{ old('IBAN') }}" required autofocus>
+                            <input placeholder="NL01 BANK 0123 4567 89" id="IBAN" type="text" class="form-control" name="IBAN" required autofocus>
                         </div>
                     </div>
                 </div>

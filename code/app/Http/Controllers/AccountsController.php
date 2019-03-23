@@ -27,6 +27,9 @@ class AccountsController extends Controller
         $account = new \App\Account;
 
         $account->user_id = auth()->user()->id;
+        if ( empty($request->IBAN) ) {
+            return abort(404);
+        }
         $account->IBAN = $request->IBAN;
 
         $account->save();
@@ -51,6 +54,9 @@ class AccountsController extends Controller
     public function editPOST( Request $request, $id )
     {
         $account = \App\Account::find($id);
+        if ( empty($request->IBAN) ) {
+            return abort(404);
+        }
         $account->IBAN = $request->IBAN;
         $account->save();
 
