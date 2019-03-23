@@ -33,10 +33,16 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                         <div class="navbar-nav">
-                            <a class="nav-item nav-link" href="#">Rekeningen</a>
+                            <a class="nav-item nav-link" href="<?= URL::to('/accounts'); ?>">Rekeningen</a>
                         </div>
                         <div class="navbar-nav ml-auto">
-                            <a class="btn btn-light" href="#">Nieuwe aanvraag</a>
+                            <a class="nav-item nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                Uitloggen( {{ Auth::user()->name }} )
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
                         </div>
                     </div>
                 @endif

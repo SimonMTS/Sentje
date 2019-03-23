@@ -24,16 +24,19 @@
 
 12) i18n, l10n
 
+--
 
 Yoran: 2, 3, 5, 7, 8, 9
 
 Simon: 1, 4, 6, 10, 11, 12
 
+--
 
 php artisan migrate:fresh
 
 php artisan db:seed
 
+--
 
 henk.janssen@email.com
 
