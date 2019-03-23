@@ -11,14 +11,27 @@
 |
 */
 
+// homepage & user profile
 Route::get('/', 'HomeController@index');
+    Route::get('/profile/{id}', 'HomeController@profile');
+    Route::post('/profile/{id}', 'HomeController@profilePOST');
 
+    Auth::routes();
+
+// bank accounts CRUD
 Route::get('/accounts', 'AccountsController@index');
+    Route::get('/accounts/add', 'AccountsController@add');
+    Route::post('/accounts/add', 'AccountsController@addPOST');
 
+    Route::get('/accounts/edit/{id}', 'AccountsController@edit');
+    Route::post('/accounts/edit/{id}', 'AccountsController@editPOST');
+    
+    Route::post('/accounts/delete/{id}', 'AccountsController@destroy');
+
+// payment
 Route::get('/payment', 'PaymentController@index');
 
-Auth::routes();
-
-Route::get('/home', function () {
+// not loggedin homepage
+Route::get('/welcome', function () {
     return view('welcome');
 })->name('welcome');

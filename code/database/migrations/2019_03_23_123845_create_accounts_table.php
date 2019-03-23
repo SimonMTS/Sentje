@@ -17,6 +17,7 @@ class CreateAccountsTable extends Migration
             $table->increments('id');
             $table->integer('user_id');
             $table->string('IBAN');
+            $table->timestamps();
         });
     }
 

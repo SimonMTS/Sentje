@@ -15,7 +15,7 @@
                 <div class="card-body">
                     <h6 class="card-subtitle mb-2 text-muted float-right">23/03/2019</h6>
                     <h5 class="card-title">Voor de film</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">$10,50</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">&euro;10,50</h6>
                     <p class="card-text">0/3 betaald</p>
                     <a href="#" class="card-link">Details</a>
                 </div>

@@ -20,9 +20,14 @@
 
         <!-- Styles -->
         <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/all.min.css') }}" rel="stylesheet">
         <link href="{{ asset('css/main.css') }}" rel="stylesheet">
+        
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="{{ URL::asset('favicon.png') }}">
+		<link rel="icon" href="{{ URL::asset('favicon.png') }}" type="image/x-icon">
     </head>
-    <body>
+    <body class="pb-5">
         
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
@@ -35,15 +40,24 @@
                         <div class="navbar-nav">
                             <a class="nav-item nav-link" href="<?= URL::to('/accounts'); ?>">Rekeningen</a>
                         </div>
-                        <div class="navbar-nav ml-auto">
-                            <a class="nav-item nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                Uitloggen( {{ Auth::user()->name }} )
-                            </a>
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                </a>
 
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                @csrf
-                            </form>
-                        </div>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="<?= URL::to('/profile/'.Auth::user()->id); ?>">Profiel</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                        Uitloggen
+                                    </a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
                 @endif
             </div>

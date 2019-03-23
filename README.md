@@ -32,6 +32,8 @@ Simon: 1, 4, 6, 10, 11, 12
 
 --
 
+(op nieuwe pc: composer update)
+
 php artisan migrate:fresh
 
 php artisan db:seed
