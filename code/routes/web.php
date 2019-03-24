@@ -31,6 +31,8 @@ Route::get('/accounts', 'AccountsController@index');
 // payment
 Route::get('/payment', 'PaymentController@index');
     Route::post('/payment', 'PaymentController@addPOST');
+    Route::get('/pay/{id}', 'PaymentController@receivePayment');
+    Route::get('/paysetup/{id}', 'PaymentController@setupPayment');
 
 // not loggedin homepage
 Route::get('/welcome', function () {

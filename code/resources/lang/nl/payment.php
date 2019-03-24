@@ -13,5 +13,7 @@ return [
 
     'success' => 'xx',
     'sentjeAdded' => 'xx',
-
+    
+    'toReceiver' => 'Voor',
+    'Pay' => 'Betalen',
 ];
