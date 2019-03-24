@@ -25,7 +25,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $PaymentRequests = \App\PaymentRequest::where('owner_id', auth()->user()->id)->orderBy('created_at', 'desc')->get();
+        $PaymentRequests = \App\PaymentRequest::where('owner_id', auth()->user()->id)->orderBy('updated_at', 'desc')->get();
 
         return view('home', [
             'requests' => $PaymentRequests
