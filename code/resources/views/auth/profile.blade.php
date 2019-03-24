@@ -14,7 +14,7 @@
                 </div>
             @endif
 
-            <h1 class="display-4 mb-5">{{ __('text.bankDelete') }}</h1>
+            <h1 class="display-4 mb-5">{{ __('text.profile') }}</h1>
 
             <form method="POST" action="<?= URL::to('/profile/'.$user['id']); ?>">
                 @csrf

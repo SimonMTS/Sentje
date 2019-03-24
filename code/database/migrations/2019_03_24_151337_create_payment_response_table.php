@@ -16,6 +16,7 @@ class CreatePaymentResponseTable extends Migration
         Schema::create('payment_response', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('request_id');
+            $table->string('mollie_id');
             $table->boolean('paid');
             $table->string('information');
             $table->timestamps();

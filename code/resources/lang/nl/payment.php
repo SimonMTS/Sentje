@@ -16,4 +16,6 @@ return [
     
     'toReceiver' => 'Voor',
     'Pay' => 'Betalen',
+    'paymentSuccess' => 'Betaling is gelukt!',
+    'closePage' => 'Je kunt deze pagina nu sluiten.'
 ];

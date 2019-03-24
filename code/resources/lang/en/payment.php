@@ -5,5 +5,7 @@ return [
     'newSentje' => 'Request new Sentje',
 
     'toReceiver' => 'To',
-    'Pay' => 'Pay'
+    'Pay' => 'Pay',
+    'paymentSuccess' => 'Payment has succeeded!',
+    'closePage' => 'You can close this page.'
 ];

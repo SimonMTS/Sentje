@@ -29,9 +29,9 @@
         <link rel="shortcut icon" href="{{ URL::asset('favicon.png') }}">
 		<link rel="icon" href="{{ URL::asset('favicon.png') }}" type="image/x-icon">
     </head>
-    <body class="pb-5">
+    <body class="pb-5 bg-success">
         
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-success">
             <div class="container">
                 <a class="navbar-brand" href="<?= URL::to('/'); ?>">{{ config('app.name', 'Laravel') }}</a>
                 <ul class="navbar-nav ml-auto">
@@ -61,7 +61,7 @@
                             <h5 class="card-title">&euro; {{ number_format( $paymentRequest['money_amount'], 2, $dec_point, $thousands_sep ) }}</h5>
                             <p class="card-text">{{ $paymentRequest['text'] }}</p>
                             <h6 class="card-subtitle mb-2 text-muted">{{ __('payment.toReceiver') }} {{ $receiver }}</h6>
-                            <a  href="<?= URL::to('/paysetup/'.$paymentRequest['id']); ?>" class="btn btn-block btn-primary mt-3">{{ __('payment.Pay') }}</a>
+                            <p class="card-text">{{ __('payment.closePage') }}</p>
                         </div>
                     </div>
                 </div>
