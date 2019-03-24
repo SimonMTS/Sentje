@@ -33,6 +33,7 @@ Route::get('/payment', 'PaymentController@index');
     Route::post('/payment', 'PaymentController@addPOST');
     Route::get('/pay/{id}', 'PaymentController@receivePayment');
     Route::get('/paysetup/{id}', 'PaymentController@setupPayment');
+    Route::get('/paycomplete/{id}', 'PaymentController@completePayment');
 
 // not loggedin homepage
 Route::get('/welcome', function () {

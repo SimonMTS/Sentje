@@ -70,7 +70,7 @@ class PaymentController extends Controller
                 "value" => "".number_format( $paymentRequest['money_amount'], 2 )
             ],
             "description" => $paymentRequest['text'],
-            "redirectUrl" => URL::to('/paycomplete'),
+            "redirectUrl" => URL::to('/paycomplete/'.$paymentRequest['id']),
             "webhookUrl"  => "https://webshop.example.org/mollie-webhook/",
         ]);
 
@@ -78,5 +78,9 @@ class PaymentController extends Controller
         
         return redirect( $payment->getCheckoutUrl() );
         //echo '<pre>';var_dump( $mollie );exit;        
+    }
+
+    public function completePayment( $id ) {
+        
     }
 }
