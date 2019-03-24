@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Sanitize;
 
 class AccountsController extends Controller
 {
@@ -30,7 +31,7 @@ class AccountsController extends Controller
         if ( empty($request->IBAN) ) {
             return abort(404);
         }
-        $account->IBAN = $request->IBAN;
+        $account->IBAN = encrypt( Sanitize::Input($request->IBAN) );
 
         $account->save();
 
@@ -41,6 +42,8 @@ class AccountsController extends Controller
 
     public function edit( $id )
     {
+        $id = Sanitize::Input( $id );
+
         $account = \App\Account::find($id);
         if ( !isset($account) ) {
             return abort(404);
@@ -53,11 +56,13 @@ class AccountsController extends Controller
 
     public function editPOST( Request $request, $id )
     {
+        $id = Sanitize::Input( $id );
+
         $account = \App\Account::find($id);
         if ( empty($request->IBAN) ) {
             return abort(404);
         }
-        $account->IBAN = $request->IBAN;
+        $account->IBAN = encrypt( Sanitize::Input($request->IBAN) );
         $account->save();
 
         $request->session()->flash('success', [__('text.success'), __('text.accountEdited')]);
@@ -67,6 +72,8 @@ class AccountsController extends Controller
 
     public function destroy( Request $request, $id )
 	{
+        $id = Sanitize::Input( $id );
+
         $account = \App\Account::find($id);
         if ( isset($account) ) {
             $account->delete();

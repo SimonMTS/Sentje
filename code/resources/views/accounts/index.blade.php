@@ -32,7 +32,7 @@
                     @foreach ($accounts as $account)
                         <tr>
                             <th scope="row">{{ $loop->index + 1 }}</th>
-                            <td class="text-truncate" style="max-width: 50px;">{{ $account['IBAN'] }}</td>
+                            <td class="text-truncate" style="max-width: 50px;">{{ decrypt($account['IBAN']) }}</td>
                             <td><a class="text-info" href="<?= URL::to('/accounts/edit/' . $account['id']); ?>"><i class="fas fa-edit"></i></a></td>
                             <td>
                                 <a href="javascript:void(0)" class="text-danger" data-toggle="modal" data-target="#deleteModal{{ $loop->index }}">

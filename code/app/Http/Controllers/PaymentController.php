@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Mollie\Api\MollieApiClient;
 use Illuminate\Support\Facades\URL;
+use App\Http\Sanitize;
 
 class PaymentController extends Controller
 {
@@ -18,9 +19,9 @@ class PaymentController extends Controller
     {
         $paymentRequest = new \App\PaymentRequest;
 
-        $paymentRequest->text = $request->text;
-        $paymentRequest->money_amount = $request->money_amount;
-        $paymentRequest->possible_payments = $request->possible_payments;
+        $paymentRequest->text = Sanitize::Input( $request->text );
+        $paymentRequest->money_amount = Sanitize::Input( $request->money_amount );
+        $paymentRequest->possible_payments = Sanitize::Input( $request->possible_payments );
 
         $paymentRequest->owner_id = auth()->user()->id;
         $paymentRequest->created_at = date( 'Y-m-d H:i:s' );
@@ -35,7 +36,10 @@ class PaymentController extends Controller
         return redirect('');
     }
 
-    public function receivePayment( $id ){
+    public function receivePayment( $id )
+    {
+        $id = Sanitize::Input( $id );
+
         $paymentRequest = \App\PaymentRequest::find($id);
         
         if ( !isset($paymentRequest) ) {
@@ -54,7 +58,10 @@ class PaymentController extends Controller
         ]);
     }
 
-    public function setupPayment( $id ) {
+    public function setupPayment( $id )
+    {
+        $id = Sanitize::Input( $id );
+
         $paymentRequest = \App\PaymentRequest::find($id);
         
         if ( !isset($paymentRequest) ) {
@@ -88,11 +95,14 @@ class PaymentController extends Controller
         return redirect( $payment->getCheckoutUrl() );
     }
 
-    public function completePayment( $id ) {
+    public function completePayment( $id )
+    {
+        $id = Sanitize::Input( $id );
+
         $paymentResponse = \App\PaymentResponse::find($id);    
 
         if ( !isset($paymentResponse) ) {
-            return abort(503);
+            return abort(404);
         }
 
         $mollie = new MollieAPIClient;
@@ -115,25 +125,25 @@ class PaymentController extends Controller
         $paymentResponse->information = $details_consumerName."---".$details_consumerAccount;
 
         $paymentResponse->save(); 
+
         return redirect("paymentdone/".$paymentResponse['id']);
-        // echo '<pre>';var_dump( $payment );exit;
     }
 
-    public function paymentDone( $id ) {
-        $paymentResponse = \App\PaymentResponse::find($id);    
+    public function paymentDone( $id )
+    {
+        $id = Sanitize::Input( $id );
 
+        $paymentResponse = \App\PaymentResponse::find($id);    
         if ( !isset($paymentResponse) ) {
-            return abort(503);
+            return abort(404);
         }
         
         $paymentRequest = \App\PaymentRequest::find($id);    
-
         if ( !isset($paymentRequest) ) {
             return abort(503);
         }
 
         $receiver = \App\User::find( $paymentRequest['owner_id'] );
-        
         if ( !isset($receiver) ) {
             return abort(503);
         }

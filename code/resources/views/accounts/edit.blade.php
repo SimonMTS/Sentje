@@ -27,7 +27,7 @@
                                     <i class="fas fa-university"></i>
                                 </span>
                             </div>
-                            <input placeholder="NL01 BANK 0123 4567 89" id="IBAN" type="text" class="form-control" name="IBAN" value="{{ $account['IBAN'] }}" required>
+                            <input placeholder="NL01 BANK 0123 4567 89" id="IBAN" type="text" class="form-control" name="IBAN" value="{{ decrypt($account['IBAN']) }}" required>
                         </div>
                     </div>
                 </div>

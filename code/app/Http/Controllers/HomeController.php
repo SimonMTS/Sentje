@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Sanitize;
 
 class HomeController extends Controller
 {
@@ -35,6 +36,8 @@ class HomeController extends Controller
 
     public function profile( $id )
     {
+        $id = Sanitize::Input( $id );
+
         $user = \App\User::find($id);
         if ( !isset($user) ) {
             return abort(404);
@@ -47,17 +50,19 @@ class HomeController extends Controller
 
     public function profilePOST( Request $request, $id )
     {
+        $id = Sanitize::Input( $id );
+
         $user = \App\User::find($id);
 
-        $user->name = $request->name;
-        $user->email = $request->email;
+        $user->name = Sanitize::Input( $request->name );
+        $user->email = Sanitize::Input( $request->email );
 
         if ( 
             isset($request->password) && !empty($request->password) &&
             isset($request->password_confirm) && 
             $request->password_confirm === $request->password
         ) {
-            $user->password = Hash::make($request->password);
+            $user->password = Hash::make( $request->password );
         }
 
         $user->save();
