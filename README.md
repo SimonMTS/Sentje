@@ -32,7 +32,7 @@ Simon: 1, 4, 6, 10, 11, 12
 
 --
 
-(op nieuwe pc: composer update)
+composer update ( php composer.phar update, maybe )
 
 php artisan migrate:fresh
 

@@ -30,6 +30,7 @@ Route::get('/accounts', 'AccountsController@index');
 
 // payment
 Route::get('/payment', 'PaymentController@index');
+    Route::post('/payment', 'PaymentController@addPOST');
 
 // not loggedin homepage
 Route::get('/welcome', function () {

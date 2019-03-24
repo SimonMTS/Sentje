@@ -17,7 +17,7 @@
                     <div class="card-body">
                         <h6 class="card-subtitle mb-2 text-muted float-right">{{ date( __('text.date_format'), strtotime($request['created_at']) ) }}</h6>
                         <h5 class="card-title">{{ $request['text'] }}</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">{{ $request['currency'] }} {{ number_format( $request['money_amount'], 2 ) }}</h6>
+                        <h6 class="card-subtitle mb-2 text-muted">&euro; {{ number_format( $request['money_amount'], 2 ) }}</h6>
                         <p class="card-text">{{ $request['completed_payments'] }}/{{ $request['possible_payments'] }} {{ __('text.paid') }}</p>
                         <a href="#" class="card-link">{{ __('text.details') }}</a>
                     </div>

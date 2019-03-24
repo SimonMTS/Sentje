@@ -25,21 +25,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $requests[0] = [
-            'amount' => '€10,50',
-            'text' => 'Voor de film',
-            'numberPaid' => [0, 3],
-            'date' => '23/03/2019'
-        ];
-        $requests[1] = [
-            'amount' => '£50,00',
-            'text' => 'Van het eten gisteren',
-            'numberPaid' => [1, 3],
-            'date' => '14/03/2019'
-        ];
-
-        $PaymentRequests = \App\PaymentRequest::where('owner_id', auth()->user()->id)->get();
-
+        $PaymentRequests = \App\PaymentRequest::where('owner_id', auth()->user()->id)->orderBy('created_at', 'desc')->get();
 
         return view('home', [
             'requests' => $PaymentRequests
