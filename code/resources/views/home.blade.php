@@ -9,16 +9,16 @@
     </div>
 
     <div class="row justify-content-center">
-        <div class="col-6 pt-3">
+        <div class="col-12 col-md-6 pt-3">
 
             @foreach ($requests as $request)
             
                 <div class="card mb-3">
                     <div class="card-body">
-                        <h6 class="card-subtitle mb-2 text-muted float-right">{{ $request['date'] }}</h6>
+                        <h6 class="card-subtitle mb-2 text-muted float-right">{{ date( __('text.date_format'), strtotime($request['created_at']) ) }}</h6>
                         <h5 class="card-title">{{ $request['text'] }}</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">{{ $request['amount'] }}</h6>
-                        <p class="card-text">{{ $request['numberPaid'][0] }}/{{ $request['numberPaid'][1] }} {{ __('text.paid') }}</p>
+                        <h6 class="card-subtitle mb-2 text-muted">{{ $request['currency'] }} {{ number_format( $request['money_amount'], 2 ) }}</h6>
+                        <p class="card-text">{{ $request['completed_payments'] }}/{{ $request['possible_payments'] }} {{ __('text.paid') }}</p>
                         <a href="#" class="card-link">{{ __('text.details') }}</a>
                     </div>
                 </div>

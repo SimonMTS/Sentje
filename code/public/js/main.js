@@ -29,8 +29,8 @@ $( document ).ready(function() {
     });
 
 
-    $("#change_lang_en").click(function(){
-        document.cookie = "locale=en; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/";
+    $("#change_lang_us").click(function(){
+        document.cookie = "locale=us; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/";
         location.reload();
     });
     $("#change_lang_nl").click(function(){

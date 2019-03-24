@@ -38,8 +38,11 @@ class HomeController extends Controller
             'date' => '14/03/2019'
         ];
 
+        $PaymentRequests = \App\PaymentRequest::where('owner_id', auth()->user()->id)->get();
+
+
         return view('home', [
-            'requests' => $requests
+            'requests' => $PaymentRequests
         ]);
     }
 

@@ -24,8 +24,8 @@
                     <tr>
                         <th style="width: 10%" scope="col">#</th>
                         <th style="width: 70%" scope="col">IBAN</th>
-                        <th style="width: 10%" scope="col">{{ __('text.bankEdit') }}</th>
-                        <th style="width: 10%" scope="col">{{ __('text.bankDelete') }}</th>
+                        <th style="width: 10%" scope="col"></th>
+                        <th style="width: 10%" scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>

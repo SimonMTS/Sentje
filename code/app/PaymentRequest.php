@@ -3,17 +3,17 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Auth;
 
-class Account extends Model
+class PaymentRequest extends Model
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'accounts';
+    protected $table = 'payment_requests';
 
     public $timestamps = true;
+
 
 }

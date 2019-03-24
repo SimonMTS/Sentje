@@ -43,4 +43,6 @@ return [
     'paid' => 'bezahlt',
     'details' => 'Einzelheiten',
 
+    'date_format' => 'd/m/Y',
+
 ];

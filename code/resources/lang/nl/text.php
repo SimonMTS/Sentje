@@ -43,4 +43,6 @@ return [
     'paid' => 'betaald',
     'details' => 'Details',
 
+    'date_format' => 'd/m/Y',
+
 ];

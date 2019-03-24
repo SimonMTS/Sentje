@@ -43,4 +43,6 @@ return [
     'paid' => 'paid',
     'details' => 'Details',
 
+    'date_format' => 'm/d/Y',
+
 ];
