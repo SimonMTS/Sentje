@@ -16,6 +16,23 @@ class PaymentController extends Controller
         return view('payment.index');
     }
 
+    public function viewPaymentRequest( $id )
+    {
+        $id = Sanitize::Input( $id );
+
+        $paymentRequest = \App\PaymentRequest::find($id);
+        if ( !isset($paymentRequest) ) {
+            return abort(404);
+        }
+
+        $paymentResponses = \App\PaymentResponse::where('request_id', $paymentRequest->id)->get();
+
+        return view('payment.view', [
+            'request' => $paymentRequest,
+            'responses' => $paymentResponses
+        ]);
+    }
+
     public function addPOST( Request $request )
     {
         $paymentRequest = new \App\PaymentRequest;
@@ -43,7 +60,7 @@ class PaymentController extends Controller
 
         $paymentRequest = \App\PaymentRequest::find($id);
         
-        if ( !isset($paymentRequest) ) {
+        if ( !isset($paymentRequest) || $paymentRequest['completed_payments'] >= $paymentRequest['possible_payments'] ) {
             return abort(404);
         }
         
@@ -122,10 +139,14 @@ class PaymentController extends Controller
     {
         $id = Sanitize::Input( $id );
 
-        $paymentResponse = \App\PaymentResponse::find($id);    
-
+        $paymentResponse = \App\PaymentResponse::find($id);
         if ( !isset($paymentResponse) ) {
             return abort(404);
+        }
+
+        $paymentRequest = \App\PaymentRequest::find($id);    
+        if ( !isset($paymentRequest) ) {
+            return abort(503);
         }
 
         $mollie = new MollieAPIClient;
@@ -148,6 +169,10 @@ class PaymentController extends Controller
         $paymentResponse->information = $details_consumerName."---".$details_consumerAccount;
 
         $paymentResponse->save(); 
+
+
+        $paymentRequest->completed_payments++;
+        $paymentRequest->save();
 
         return redirect("paymentdone/".$paymentResponse['id']);
     }

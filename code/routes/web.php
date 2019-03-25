@@ -31,11 +31,14 @@ Route::get('/accounts', 'AccountsController@index');
 // payment
 Route::get('/payment', 'PaymentController@index');
     Route::post('/payment', 'PaymentController@addPOST');
+
     Route::get('/pay/{id}', 'PaymentController@receivePayment');
     Route::post('/paysetup/{id}', 'PaymentController@setupPayment');
     Route::get('/paycomplete/{id}', 'PaymentController@completePayment');
+
     Route::get('/paymentdone/{id}', 'PaymentController@paymentDone');
-    
+
+    Route::get('/payment/view/{id}', 'PaymentController@viewPaymentRequest');
 
 // not loggedin homepage
 Route::get('/welcome', function () {
