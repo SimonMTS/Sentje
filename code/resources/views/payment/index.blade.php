@@ -42,7 +42,7 @@
                 <div class="form-group row">
                     <div class="col-lg-4 col-md-5">
                         <label>{{ __('payment.sentjeNote') }}</label>
-                        <input name="text" type="text" class="form-control" placeholder="{{ __('payment.sentjeNoteExample') }}" required>
+                        <input name="text" type="text" class="form-control" placeholder="{{ __('payment.sentjeNoteExample') }}">
                     </div>
                 </div>
                 
