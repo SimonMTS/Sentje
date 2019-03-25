@@ -1,3 +1,6 @@
+<?php
+    use App\Http\ConvertCurrency;
+?>
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -46,22 +49,67 @@
 
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-12 col-md-6 pt-3">
+                <div class="col-12 col-lg-6 pt-3">
                     <div class="card mb-3">
                         <div class="card-body">
                             <?php
                                 if ( app()->getLocale() === 'us' ) {
+                                    // US
                                     $dec_point = ".";
                                     $thousands_sep = ",";
+
+                                    $amount = ConvertCurrency::EURtoUSD($paymentRequest['money_amount']);
+                                    $currency = '&dollar;';
                                 } else {
+                                    // NL & DE
                                     $dec_point = ",";
                                     $thousands_sep = ".";
+
+                                    $amount = $paymentRequest['money_amount'];
+                                    $currency = '&euro;';
                                 }
                             ?>  
-                            <h5 class="card-title">&euro; {{ number_format( $paymentRequest['money_amount'], 2, $dec_point, $thousands_sep ) }}</h5>
+                            <h5 class="card-title">{!! $currency !!}{{ number_format( $amount, 2, $dec_point, $thousands_sep ) }}</h5>
                             <p class="card-text">{{ $paymentRequest['text'] }}</p>
                             <h6 class="card-subtitle mb-2 text-muted">{{ __('payment.toReceiver') }} {{ $receiver }}</h6>
-                            <a  href="<?= URL::to('/paysetup/'.$paymentRequest['id']); ?>" class="btn btn-block btn-primary mt-3">{{ __('payment.Pay') }}</a>
+                            <form method="POST" action="<?= URL::to('/paysetup/'.$paymentRequest['id']); ?>">
+                                @csrf
+                                <!-- <a  href="<?= URL::to('/paysetup/'.$paymentRequest['id']); ?>" class="btn btn-block btn-lg btn-primary mt-4">{{ __('payment.Pay') }}</a> -->
+                                <button class="btn btn-block btn-lg btn-primary mt-4" type="submit">
+                                    {{ __('payment.Pay') }}
+                                </button>
+
+                                <button class="btn btn-link my-3" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                    {{ __('payment.optionalData') }}
+                                </button>
+                                <div class="collapse" id="collapseExample">
+                                    <div class="form-group row">
+                                        <label for="staticEmail" class="col-sm-4 col-form-label">{{ __('payment.whoYouAre') }}</label>
+                                        <div class="col-sm-8">
+                                            <input name="respondername" type="text" class="form-control" placeholder="Jan van Dijk">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="staticEmail" class="col-sm-4 col-form-label">{{ __('payment.whereYouAre') }}</label>
+                                        <div class="col-1">
+                                            <div class="custom-control custom-checkbox">
+                                                <input name="loccheckbox" type="checkbox" class="custom-control-input" id="customCheck1">
+                                                <label class="custom-control-label" for="customCheck1"></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-11 col-sm-7">
+                                            <?php 
+                                                // TODO: only for testing (to avoid 127.0.0.1), change when live.
+                                                $loc = geoip()->getLocation('213.73.228.52'); 
+                                                //$loc = geoip()->getLocation( Request::ip() ); 
+                                            ?>
+                                            <input type="text" disabled class="form-control" placeholder="{{ $loc['country'] }}, {{ $loc['state_name'] }}, {{ $loc['city'] }}">
+                                            <input name="locinfo" type="hidden" value="<?= $loc['ip'] .'|'. $loc['country'] .'|'. $loc['state_name'] .'|'. $loc['city'] .'|'. $loc['lat'] .'|'. $loc['lon'] ?>">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
                         </div>
                     </div>
                 </div>

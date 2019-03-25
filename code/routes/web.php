@@ -32,7 +32,7 @@ Route::get('/accounts', 'AccountsController@index');
 Route::get('/payment', 'PaymentController@index');
     Route::post('/payment', 'PaymentController@addPOST');
     Route::get('/pay/{id}', 'PaymentController@receivePayment');
-    Route::get('/paysetup/{id}', 'PaymentController@setupPayment');
+    Route::post('/paysetup/{id}', 'PaymentController@setupPayment');
     Route::get('/paycomplete/{id}', 'PaymentController@completePayment');
     Route::get('/paymentdone/{id}', 'PaymentController@paymentDone');
     

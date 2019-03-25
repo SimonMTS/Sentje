@@ -49,7 +49,7 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a href="javascript:void(0)" id="change_lang_us" class="flag-icon <?= ($_COOKIE['locale'] === 'en' ? 'flag-active' : '') ?>" style="text-decoration: none !important;"> <img src="<?= URL::to('/svg/united-states.svg'); ?>"> </a>
+                                    <a href="javascript:void(0)" id="change_lang_us" class="flag-icon <?= ($_COOKIE['locale'] === 'us' ? 'flag-active' : '') ?>" style="text-decoration: none !important;"> <img src="<?= URL::to('/svg/united-states.svg'); ?>"> </a>
                                     <a href="javascript:void(0)" id="change_lang_nl" class="flag-icon <?= ($_COOKIE['locale'] === 'nl' ? 'flag-active' : '') ?>" style="text-decoration: none !important;"> <img src="<?= URL::to('/svg/netherlands.svg'); ?>"> </a>
                                     <a href="javascript:void(0)" id="change_lang_de" class="flag-icon <?= ($_COOKIE['locale'] === 'de' ? 'flag-active' : '') ?>" style="text-decoration: none !important;"> <img src="<?= URL::to('/svg/germany.svg'); ?>"> </a>
                                     

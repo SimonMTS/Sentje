@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Mollie\Api\MollieApiClient;
 use Illuminate\Support\Facades\URL;
 use App\Http\Sanitize;
+use App\Http\ConvertCurrency;
 
 class PaymentController extends Controller
 {
@@ -58,9 +59,21 @@ class PaymentController extends Controller
         ]);
     }
 
-    public function setupPayment( $id )
+    public function setupPayment( Request $request, $id )
     {
         $id = Sanitize::Input( $id );
+
+        if ( isset( $request->respondername ) ) {
+            $respondername = Sanitize::Input( $request->respondername );
+        } else {
+            $respondername = 'unknown';
+        }
+
+        if ( isset( $request->loccheckbox ) && isset( $request->locinfo ) ) {
+            $locinfo = explode( '|', Sanitize::Input( $request->locinfo ) );
+        } else {
+            $locinfo = 'unknown';
+        }
 
         $paymentRequest = \App\PaymentRequest::find($id);
         
@@ -71,10 +84,18 @@ class PaymentController extends Controller
         $mollie = new MollieAPIClient;
         $mollie->setApiKey("test_CwJ8nvTDC9gzxkTAbf7HQN8veTCCUf");
         
+        if ( app()->getLocale() === 'us' ) {
+            $currency = 'USD';
+            $money_amount = "".number_format( ConvertCurrency::EURtoUSD($paymentRequest['money_amount']), 2 );
+        } else {
+            $currency = 'EUR';
+            $money_amount = "".number_format( $paymentRequest['money_amount'], 2 );
+        }
+
         $init_payment = $mollie->payments->create([
             "amount" => [  
-                "currency" => 'EUR', 
-                "value" => "".number_format( $paymentRequest['money_amount'], 2 )
+                "currency" => $currency, 
+                "value" => $money_amount
             ],
             "description" => $paymentRequest['text'],
             "redirectUrl" => URL::to('/paycomplete/'.$paymentRequest['id']),
@@ -87,6 +108,8 @@ class PaymentController extends Controller
         $paymentResponse->mollie_id = $init_payment->id;
         $paymentResponse->paid = false;
         $paymentResponse->information = "";
+        $paymentResponse->name = $respondername;
+        $paymentResponse->location_info = json_encode($locinfo);
        
         $paymentResponse->save();
 

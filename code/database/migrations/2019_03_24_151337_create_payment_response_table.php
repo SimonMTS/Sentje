@@ -19,6 +19,8 @@ class CreatePaymentResponseTable extends Migration
             $table->string('mollie_id');
             $table->boolean('paid');
             $table->string('information');
+            $table->string('name');
+            $table->string('location_info');
             $table->timestamps();
         });
     }

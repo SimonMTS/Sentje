@@ -17,5 +17,8 @@ return [
     'toReceiver' => 'Voor',
     'Pay' => 'Betalen',
     'paymentSuccess' => 'Betaling is gelukt!',
-    'closePage' => 'Je kunt deze pagina nu sluiten.'
+    'closePage' => 'Je kunt deze pagina nu sluiten.',
+    'optionalData' => 'Optioneel, personaliseer je betaling.',
+    'whoYouAre' => 'Wie je bent',
+    'whereYouAre' => 'Waar je bent',
 ];
