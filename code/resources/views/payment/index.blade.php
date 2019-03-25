@@ -9,6 +9,15 @@
 
             <form method="POST" action="<?= URL::to('/payment'); ?>">
                 @csrf
+                
+                <div class="form-group row">
+                    <div class="col-lg-4 col-md-5">
+                    <label>{{ __('payment.sentjeSelectBankAccount') }}</label>
+                        <select class="browser-default custom-select" required> 
+                            <!-- // TODO: Add content from database bank accounts from user  -->
+                        </select>
+                    </div>
+                </div>
 
                 <div class="form-group row">
                     <div class="col-lg-4 col-md-5">
@@ -30,7 +39,6 @@
                         </div>
                     </div>
                 </div>
-                
 
                 <div class="form-group row">
                     <div class="col-lg-4 col-md-5">

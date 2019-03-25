@@ -15,6 +15,8 @@ return [
     'sentjeImage' => 'Afbeelding Toevoegen',
     'sentjeUpload' => 'Upload',
     'sentjeChooseImage' => 'Kies afbeelding',
+    'sentjeSelectBankAccount' => 'Selecteer Rekening',
+    'sentjeChooseBankAccount' => 'Rekening',
 
 
     'success' => 'xx',
