@@ -19,7 +19,7 @@
                         <h5 class="card-title">{{ $request['text'] }}</h5>
                         <h6 class="card-subtitle mb-2 text-muted">&euro; {{ number_format( $request['money_amount'], 2 ) }}</h6>
                         <p class="card-text">{{ $request['completed_payments'] }}/{{ $request['possible_payments'] }} {{ __('text.paid') }}</p>
-                        <!-- <a href="#" class="card-link">{{ __('text.details') }}</a> -->
+                        <a href="<?= URL::to('/payment/view/' . $request['id']); ?>" class="card-link">{{ __('text.details') }}</a>
                     </div>
                     <div class="card-footer text-muted">
                         <?= URL::to('/pay/' . $request['id']); ?>
