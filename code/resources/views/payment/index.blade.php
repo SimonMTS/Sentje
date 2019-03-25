@@ -39,9 +39,28 @@
                     </div>
                 </div>
 
+                <div class="form-group row">
+                    <div class="col-lg-4 col-md-5">
+                        <label>{{ __('payment.sentjeNote') }}</label>
+                        <input name="text" type="text" class="form-control" placeholder="{{ __('payment.sentjeNoteExample') }}" required>
+                    </div>
+                </div>
+                
+                <div class="form-group row">
+                    <div class="input-group col-lg-4 col-md-5">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroupFileAddon01">{{ __('payment.sentjeUpload') }}</span>
+                        </div>
+                        <div class="custom-file">
+                            <input name="image" type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" placeholder="{{ __('payment.sentjeChooseImage') }}"   >
+                            <label class="custom-file-label" for="inputGroupFile01">{{ __('payment.sentjeChooseImage') }}</label>
+                        </div>
+                    </div>
+                </div>
+                    
                 <button type="submit" class="btn btn-success">{{ __('payment.requestSentje') }}</button>
+                
             </form>
-
         </div>
     </div>
 </div>

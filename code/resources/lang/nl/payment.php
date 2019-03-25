@@ -10,6 +10,12 @@ return [
     'sentjePossiblePayments' => 'Hoeveel mensen er kunnen betalen',
     'sentjePossiblePaymentsExample' => 'Als je geen limiet wil voer 0 in',
     'requestSentje' => 'Sentje aanvragen',
+    'sentjeNote' => 'Notitie',
+    'sentjeNoteExample' => 'Liefst voor het weekend betalen aub.',
+    'sentjeImage' => 'Afbeelding Toevoegen',
+    'sentjeUpload' => 'Upload',
+    'sentjeChooseImage' => 'Kies afbeelding',
+
 
     'success' => 'xx',
     'sentjeAdded' => 'xx',
@@ -21,4 +27,5 @@ return [
     'optionalData' => 'Optioneel, personaliseer je betaling.',
     'whoYouAre' => 'Wie je bent',
     'whereYouAre' => 'Waar je bent',
+  
 ];
