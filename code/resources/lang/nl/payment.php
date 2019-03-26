@@ -21,6 +21,7 @@ return [
     'sentjeActiveAfter' => 'Link wordt actief na ...',
     'sentjeUploadImage' => 'Afbeelding voor ontvangers',
     'sentjeOptional' => 'Optioneel',
+    'AvailableAfter' => 'Beschikbaar na ',
 
 
     'success' => 'xx',

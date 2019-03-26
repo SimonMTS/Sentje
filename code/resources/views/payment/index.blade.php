@@ -81,7 +81,7 @@
                 <div class="form-group row">
                     <div class="col-lg-4 col-md-5">
                         <label>{{ __('payment.sentjeActivationDate') }}</label>
-                        <input name="activation_date" placeholder="{{ __('payment.sentjeActiveAfter') }}" type="text" class="form-control" id="datepicker">
+                        <input name="activation_date" placeholder="{{ __('payment.sentjeActiveAfter') }}" type="text" class="form-control" id="datepicker" autocomplete="off">
 
                         <input type="hidden" id="localization_info" value="<?= htmlspecialchars(json_encode( __('payment.datePicker') )) ?>">
                     </div>
