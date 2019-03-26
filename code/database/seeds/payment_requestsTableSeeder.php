@@ -19,7 +19,8 @@ class payment_requestsTableSeeder extends Seeder
             'completed_payments' => 0,
             'created_at' => date( 'Y-m-d H:i:s' ),
             'updated_at' => date( 'Y-m-d H:i:s' ),
-            'location' => ''
+            'location' => '',
+            'file_location' => ''
         ]);
     }
 }

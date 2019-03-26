@@ -22,6 +22,7 @@ class CreatePaymentRequestsTable extends Migration
             $table->integer('completed_payments');
             $table->string('location');
             $table->timestamps();
+            $table->string('file_location');
         });
     }
 

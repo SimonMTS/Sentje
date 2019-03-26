@@ -7,6 +7,9 @@ use Mollie\Api\MollieApiClient;
 use Illuminate\Support\Facades\URL;
 use App\Http\Sanitize;
 use App\Http\ConvertCurrency;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
 
 class PaymentController extends Controller
 {
@@ -56,8 +59,22 @@ class PaymentController extends Controller
         $paymentRequest->updated_at = date( 'Y-m-d H:i:s' );
 
         $paymentRequest->location = '';
+        $paymentRequest->file_location = '';
         $paymentRequest->completed_payments = 0;
 
+       if ( $request->hasFile('image') ) {
+           request()->validate([
+               'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+           ]);
+           $filename = time().'.'.$request->image->getClientOriginalExtension();
+           $request->image->move(public_path('img'), $filename);
+        } else {
+            $filename = '';
+        }
+
+        $paymentRequest->file_location = $filename;
+
+        
         $paymentRequest->save();
 
         $request->session()->flash('sentjeSuccess', [__('payment.success'), __('payment.sentjeAdded')]);
@@ -70,7 +87,13 @@ class PaymentController extends Controller
 
         $paymentRequest = \App\PaymentRequest::find($id);
         
-        if ( !isset($paymentRequest) || $paymentRequest['completed_payments'] >= $paymentRequest['possible_payments'] ) {
+        if ( 
+            !isset($paymentRequest) || 
+            (
+                $paymentRequest['completed_payments'] >= $paymentRequest['possible_payments'] &&
+                $paymentRequest['possible_payments'] !== 0
+            )
+        ) {
             return abort(404);
         }
         
@@ -118,26 +141,29 @@ class PaymentController extends Controller
             $currency = 'EUR';
             $money_amount = "".number_format( $paymentRequest['money_amount'], 2 );
         }
+        
+        $paymentResponse = new \App\PaymentResponse;
 
+        $paymentResponse->request_id = $paymentRequest['id'];
+        $paymentResponse->paid = false;
+        $paymentResponse->information = "";
+        $paymentResponse->mollie_id = "";
+        $paymentResponse->name = $respondername;
+        $paymentResponse->location_info = json_encode($locinfo);
+        
+        $paymentResponse->save();
+        
         $init_payment = $mollie->payments->create([
             "amount" => [  
                 "currency" => $currency, 
                 "value" => $money_amount
             ],
             "description" => $paymentRequest['text'],
-            "redirectUrl" => URL::to('/paycomplete/'.$paymentRequest['id']),
+            "redirectUrl" => URL::to('/paycomplete/'.$paymentResponse['id']),
             "webhookUrl"  => "https://webshop.example.org/mollie-webhook/",
         ]);
-
-        $paymentResponse = new \App\PaymentResponse;
-
-        $paymentResponse->request_id = $paymentRequest['id'];
+    
         $paymentResponse->mollie_id = $init_payment->id;
-        $paymentResponse->paid = false;
-        $paymentResponse->information = "";
-        $paymentResponse->name = $respondername;
-        $paymentResponse->location_info = json_encode($locinfo);
-       
         $paymentResponse->save();
 
         $payment = $mollie->payments->get($init_payment->id);
@@ -154,7 +180,8 @@ class PaymentController extends Controller
             return abort(404);
         }
 
-        $paymentRequest = \App\PaymentRequest::find($id);    
+        $paymentRequest = \App\PaymentRequest::find($paymentResponse['request_id']);
+
         if ( !isset($paymentRequest) ) {
             return abort(503);
         }
@@ -191,12 +218,13 @@ class PaymentController extends Controller
     {
         $id = Sanitize::Input( $id );
 
-        $paymentResponse = \App\PaymentResponse::find($id);    
+        $paymentResponse = \App\PaymentResponse::find($id);
         if ( !isset($paymentResponse) ) {
             return abort(404);
         }
-        
-        $paymentRequest = \App\PaymentRequest::find($id);    
+
+        $paymentRequest = \App\PaymentRequest::find($paymentResponse['request_id']);
+
         if ( !isset($paymentRequest) ) {
             return abort(503);
         }
@@ -210,5 +238,19 @@ class PaymentController extends Controller
             'paymentRequest'=> $paymentRequest,
             'receiver' => $receiver['name']
         ]);
+
+    }
+
+    public function deletePaymentRequest( Request $request, $id )
+    {
+        $id = Sanitize::Input( $id );
+
+        $paymentRequest = \App\PaymentRequest::find($id);
+        if ( isset($paymentRequest) ) {
+            $paymentRequest->delete();
+        }
+        
+        $request->session()->flash('success', [__('text.success'), __('payment.requestDeleted')]);
+        return redirect('');
     }
 }

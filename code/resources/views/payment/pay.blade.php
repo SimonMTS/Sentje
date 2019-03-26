@@ -32,7 +32,7 @@
         <link rel="shortcut icon" href="{{ URL::asset('favicon.png') }}">
 		<link rel="icon" href="{{ URL::asset('favicon.png') }}" type="image/x-icon">
     </head>
-    <body class="pb-5">
+    <body class="pb-5 bg-secondary">
         
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
@@ -51,6 +51,9 @@
             <div class="row justify-content-center">
                 <div class="col-12 col-lg-6 pt-3">
                     <div class="card mb-3">
+                        @if ($paymentRequest['file_location'] !== '') 
+                            <img class="card-img-top" src="<?= URL::to('/img/'.$paymentRequest['file_location']); ?>" alt="Card image cap">
+                        @endif   
                         <div class="card-body">
                             <?php
                                 if ( app()->getLocale() === 'us' ) {

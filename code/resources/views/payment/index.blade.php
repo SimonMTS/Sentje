@@ -7,7 +7,7 @@
 
             <h1 class="display-4 mb-5">{{ __('payment.newSentje') }}</h1>
 
-            <form method="POST" action="<?= URL::to('/payment'); ?>">
+            <form method="POST" action="<?= URL::to('/payment'); ?>" enctype="multipart/form-data">
                 @csrf
                 
                 <div class="form-group row">
@@ -24,7 +24,7 @@
                 <div class="form-group row">
                     <div class="col-lg-4 col-md-5">
                         <label>{{ __('payment.sentjeText') }}</label>
-                        <input name="text" type="text" class="form-control" placeholder="{{ __('payment.sentjeTextExample') }}" required>
+                        <input name="text" type="text" class="form-control" placeholder="{{ __('payment.sentjeTextExample') }}" max="200" required>
                     </div>
                 </div>
 
@@ -37,7 +37,7 @@
                                     &euro;
                                 </span>
                             </div>
-                            <input name="money_amount" type="number" class="form-control" placeholder="{{ __('payment.sentjePriceExample') }}" required>
+                            <input name="money_amount" type="number" class="form-control" placeholder="{{ __('payment.sentjePriceExample') }}" min="0.01" step="0.01" required>
                         </div>
                     </div>
                 </div>
@@ -45,29 +45,29 @@
                 <div class="form-group row">
                     <div class="col-lg-4 col-md-5">
                         <label>{{ __('payment.sentjePossiblePayments') }}</label>
-                        <input name="possible_payments" type="number" class="form-control" placeholder="{{ __('payment.sentjePossiblePaymentsExample') }}" required>
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <div class="col-lg-4 col-md-5">
-                        <label>{{ __('payment.sentjeNote') }}</label>
-                        <input name="text" type="text" class="form-control" placeholder="{{ __('payment.sentjeNoteExample') }}">
+                        <input name="possible_payments" type="number" class="form-control" placeholder="{{ __('payment.sentjePossiblePaymentsExample') }}" min="0" required>
                     </div>
                 </div>
                 
                 <div class="form-group row">
-                    <div class="input-group col-lg-4 col-md-5">
+                    <div class="input-group col-lg-4 col-md-5 mt-2">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="inputGroupFileAddon01">{{ __('payment.sentjeUpload') }}</span>
                         </div>
                         <div class="custom-file">
-                            <input name="image" type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" placeholder="{{ __('payment.sentjeChooseImage') }}"   >
+                            <input name="image" type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" placeholder="{{ __('payment.sentjeChooseImage') }}">
+                            
                             <label class="custom-file-label" for="inputGroupFile01">{{ __('payment.sentjeChooseImage') }}</label>
                         </div>
                     </div>
                 </div>
-                    
+                
+                <div class="row mb-2">
+                    <div class="col-lg-4 col-md-5 mt-2">
+                        <img class="img-fluid rounded" id="image" accept=".jpeg, .png, .jpg, .gif, .svg">
+                    </div>
+                </div>
+                
                 <button type="submit" class="btn btn-success">{{ __('payment.requestSentje') }}</button>
                 
             </form>

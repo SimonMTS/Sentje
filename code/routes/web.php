@@ -39,6 +39,7 @@ Route::get('/payment', 'PaymentController@index');
     Route::get('/paymentdone/{id}', 'PaymentController@paymentDone');
 
     Route::get('/payment/view/{id}', 'PaymentController@viewPaymentRequest');
+    Route::post('/payment/delete/{id}', 'PaymentController@deletePaymentRequest');
 
 // not loggedin homepage
 Route::get('/welcome', function () {
