@@ -33,5 +33,68 @@ return [
     'optionalData' => 'Optioneel, personaliseer je betaling.',
     'whoYouAre' => 'Wie je bent',
     'whereYouAre' => 'Waar je bent',
+
+    'datePicker' => [ 
+        'closeText' => 'Sluit',
+        'currentText' => 'Open',
+        'monthNames' => [
+            'Januari',
+            'Februari',
+            'Maart',
+            'April',
+            'Mei',
+            'Juni',
+            'Juli',
+            'Augustus',
+            'September',
+            'Oktober',
+            'November',
+            'December'
+        ],
+        'monthNamesShort' => [
+            'Jan',
+            'Feb',
+            'Maa',
+            'Apr',
+            'Mei',
+            'Jun',
+            'Jul',
+            'Aug',
+            'Sep',
+            'Okt',
+            'Nov',
+            'Dec'
+        ],
+        'dayNames' => [
+            'Maandag',
+            'Dinsdag',
+            'woensdag',
+            'Donderdag',
+            'Vrijdag',
+            'Zaterdag',
+            'Zondag'
+        ],
+        'dayNamesShort' => [
+            'Maa',
+            'Din',
+            'woe',
+            'Don',
+            'Vri',
+            'Zat',
+            'Zon'
+        ],
+        'dayNamesMin' => [
+            'Ma',
+            'Di',
+            'wo',
+            'Do',
+            'Vr',
+            'Za',
+            'Zo'
+        ],
+        'dateFormat' => 'dd/mm/yy',
+
+        'defaultRegional' => 'nl'
+    ]
   
 ];

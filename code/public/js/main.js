@@ -60,17 +60,21 @@ $( document ).ready(function() {
     });
 
     $( function() {
+        var info = JSON.parse( $("#localization_info").val() );
+
         $( "#datepicker" ).datepicker({
             minDate: new Date(),
-            closeText: 'Chiudi', // set a close button text
-            currentText: 'Oggi', // set today text
-            monthNames: ['Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno',   'Luglio','Agosto','Settembre','Ottobre','Novembre','Dicembre'], 
-            monthNamesShort: ['Gen','Feb','Mar','Apr','Mag','Giu','Lug','Ago','Set','Ott','Nov','Dic'], 
-            dayNames: ['Domenica','Luned&#236','Marted&#236','Mercoled&#236','Gioved&#236','Venerd&#236','Sabato'], 
-            dayNamesShort: ['Dom','Lun','Mar','Mer','Gio','Ven','Sab'],
-            dayNamesMin: ['Do','Lu','Ma','Me','Gio','Ve','Sa'], 
-            dateFormat: 'dd/mm/yy'
+            closeText: info.closeText,
+            currentText: info.currentText,
+            monthNames: info.monthNames, 
+            monthNamesShort: info.monthNamesShort, 
+            dayNames: info.dayNames, 
+            dayNamesShort: info.dayNamesShort, 
+            dayNamesMin: info.dayNamesMin, 
+            dateFormat: info.dateFormat, 
         });
+
+        $.datepicker.setDefaults($.datepicker.regional[ info.defaultRegional ])
     });
 
 });
