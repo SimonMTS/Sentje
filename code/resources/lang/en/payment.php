@@ -10,4 +10,7 @@ return [
     'closePage' => 'You can close this page.',
     'sentjeSelectBankAccount' => 'Select bank account',
     'sentjeChooseBankAccount' => 'Bank Account',
+    'sentjeActivationDate' => 'Activation date',
+    'sentjeActiveAfter' => 'Link will be active after ...',
+
 ];

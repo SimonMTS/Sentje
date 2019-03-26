@@ -12,7 +12,7 @@
                 
                 <div class="form-group row">
                     <div class="col-lg-4 col-md-5">
-                    <label>{{ __('payment.sentjeSelectBankAccount') }}</label>
+                    <label>{{ __('payment.sentjeSelectBankAccount') }} *</label>
                         <select class="browser-default custom-select" required> 
                             @foreach ($accounts as $account)
                                 <option value="{{ $account['id'] }}">{{ decrypt($account['IBAN']) }}</option>
@@ -23,14 +23,14 @@
 
                 <div class="form-group row">
                     <div class="col-lg-4 col-md-5">
-                        <label>{{ __('payment.sentjeText') }}</label>
+                        <label>{{ __('payment.sentjeText') }} *</label>
                         <input name="text" type="text" class="form-control" placeholder="{{ __('payment.sentjeTextExample') }}" max="200" required>
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <div class="col-lg-4 col-md-5">
-                        <label>{{ __('payment.sentjePrice') }}</label>
+                        <label>{{ __('payment.sentjePrice') }} *</label>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">
@@ -44,19 +44,29 @@
 
                 <div class="form-group row">
                     <div class="col-lg-4 col-md-5">
-                        <label>{{ __('payment.sentjePossiblePayments') }}</label>
+                        <label>{{ __('payment.sentjePossiblePayments') }} *</label>
                         <input name="possible_payments" type="number" class="form-control" placeholder="{{ __('payment.sentjePossiblePaymentsExample') }}" min="0" required>
                     </div>
                 </div>
-                
+
                 <div class="form-group row">
+                    <div class="col-lg-4 col-md-5">
+                        <hr class="mb-0">
+                        <small class="text-muted">{{ __('payment.sentjeOptional') }}</small>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-lg-4 col-md-5 mt-2">
+                        <label>{{ __('payment.sentjeUploadImage') }}</label>
+                    </div>
+                    <div class="w-100"></div>
                     <div class="input-group col-lg-4 col-md-5 mt-2">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="inputGroupFileAddon01">{{ __('payment.sentjeUpload') }}</span>
                         </div>
                         <div class="custom-file">
                             <input name="image" type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" placeholder="{{ __('payment.sentjeChooseImage') }}">
-                            
                             <label class="custom-file-label" for="inputGroupFile01">{{ __('payment.sentjeChooseImage') }}</label>
                         </div>
                     </div>
@@ -65,6 +75,13 @@
                 <div class="row mb-2">
                     <div class="col-lg-4 col-md-5 mt-2">
                         <img class="img-fluid rounded" id="image" accept=".jpeg, .png, .jpg, .gif, .svg">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-lg-4 col-md-5">
+                        <label>{{ __('payment.sentjeActivationDate') }}</label>
+                        <input name="activation_date" placeholder="{{ __('payment.sentjeActiveAfter') }}" type="text" class="form-control" id="datepicker">
                     </div>
                 </div>
                 

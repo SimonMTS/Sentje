@@ -23,6 +23,7 @@ class CreatePaymentRequestsTable extends Migration
             $table->string('location');
             $table->timestamps();
             $table->string('file_location');
+            $table->timestamp('activation_date')->nullable();
         });
     }
 

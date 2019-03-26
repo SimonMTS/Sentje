@@ -61,8 +61,12 @@ class PaymentController extends Controller
         $paymentRequest->location = '';
         $paymentRequest->file_location = '';
         $paymentRequest->completed_payments = 0;
+        $paymentRequest->activation_date = date( 'Y-m-d H:i:s' );
+        if ( isset($request->activation_date) )  {
+            $paymentRequest->activation_date = date( 'Y-m-d H:i:s', strtotime($request->activation_date) ) ;
+        }
 
-       if ( $request->hasFile('image') ) {
+        if ( $request->hasFile('image') ) {
            request()->validate([
                'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
            ]);

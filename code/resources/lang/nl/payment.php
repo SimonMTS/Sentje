@@ -17,6 +17,10 @@ return [
     'sentjeChooseImage' => 'Kies afbeelding',
     'sentjeSelectBankAccount' => 'Selecteer Rekening',
     'sentjeChooseBankAccount' => 'Rekening',
+    'sentjeActivationDate' => 'Activatie datum',
+    'sentjeActiveAfter' => 'Link wordt actief na ...',
+    'sentjeUploadImage' => 'Afbeelding voor ontvangers',
+    'sentjeOptional' => 'Optioneel',
 
 
     'success' => 'xx',

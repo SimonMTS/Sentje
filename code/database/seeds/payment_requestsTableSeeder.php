@@ -20,7 +20,8 @@ class payment_requestsTableSeeder extends Seeder
             'created_at' => date( 'Y-m-d H:i:s' ),
             'updated_at' => date( 'Y-m-d H:i:s' ),
             'location' => '',
-            'file_location' => ''
+            'file_location' => '',
+            'activation_date' => date( 'Y-m-d H:i:s' )
         ]);
     }
 }

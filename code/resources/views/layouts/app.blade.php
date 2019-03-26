@@ -9,8 +9,10 @@
 
         <title>{{ config('app.name', 'Laravel') }}</title>
 
+
         <!-- Scripts -->
         <script src="{{ asset('js/jquery.min.js') }}" defer></script>
+        <script src="{{ asset('js/jquery-ui.min.js') }}" defer></script>
         <script src="{{ asset('js/bootstrap.min.js') }}" defer></script>
         <script src="{{ asset('js/jquery.validate.min.js') }}" defer></script>
         <script src="{{ asset('js/additional-methods.min.js') }}" defer></script>
@@ -22,6 +24,7 @@
 
         <!-- Styles -->
         <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/jquery-ui.min.css') }}" rel="stylesheet">
         <link href="{{ asset('css/all.min.css') }}" rel="stylesheet">
         <link href="{{ asset('css/main.css') }}" rel="stylesheet">
         
