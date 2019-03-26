@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="col">
-            <a class="btn btn-outline-primary mt-3 float-right" href="<?= URL::to('/payment'); ?>"><i class="fas fa-chevron-left"></i> {{ __('text.back') }}</a>
+            <a class="btn btn-outline-primary mt-3 float-right" href="<?= URL::to('/'); ?>"><i class="fas fa-chevron-left"></i> {{ __('text.back') }}</a>
         </div>
     </div>
 

@@ -13,7 +13,14 @@ class PaymentController extends Controller
 
     public function index()
     {
-        return view('payment.index');
+        $accounts = \App\Account::where('user_id', auth()->user()->id)->get();
+        if ( sizeof($accounts) === 0 ) {
+            return redirect('accounts/add');
+        }
+
+        return view('payment.index', [
+            'accounts' => $accounts
+        ]);
     }
 
     public function viewPaymentRequest( $id )
@@ -25,7 +32,10 @@ class PaymentController extends Controller
             return abort(404);
         }
 
-        $paymentResponses = \App\PaymentResponse::where('request_id', $paymentRequest->id)->get();
+        $paymentResponses = \App\PaymentResponse::where([
+            ['request_id', $paymentRequest->id],
+            ['paid', true]
+        ])->get();
 
         return view('payment.view', [
             'request' => $paymentRequest,

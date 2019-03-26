@@ -49,7 +49,7 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                            {{ __('text.uSureDelete') }}<br>"{{ $account['IBAN'] }}"{{ __('text.uSureDelete2') }}
+                                            {{ __('text.uSureDelete') }}<br>"{{ decrypt($account['IBAN']) }}"{{ __('text.uSureDelete2') }}
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-link" data-dismiss="modal">{{ __('text.noNevermind') }}</button>

@@ -14,7 +14,9 @@
                     <div class="col-lg-4 col-md-5">
                     <label>{{ __('payment.sentjeSelectBankAccount') }}</label>
                         <select class="browser-default custom-select" required> 
-                            <!-- // TODO: Add content from database bank accounts from user  -->
+                            @foreach ($accounts as $account)
+                                <option value="{{ $account['id'] }}">{{ decrypt($account['IBAN']) }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
