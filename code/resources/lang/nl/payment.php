@@ -66,31 +66,31 @@ return [
             'Dec'
         ],
         'dayNames' => [
+            'Zondag',
             'Maandag',
             'Dinsdag',
             'woensdag',
             'Donderdag',
             'Vrijdag',
-            'Zaterdag',
-            'Zondag'
+            'Zaterdag'
         ],
         'dayNamesShort' => [
+            'Zon',
             'Maa',
             'Din',
             'woe',
             'Don',
             'Vri',
-            'Zat',
-            'Zon'
+            'Zat'
         ],
         'dayNamesMin' => [
+            'Zo',
             'Ma',
             'Di',
             'wo',
             'Do',
             'Vr',
-            'Za',
-            'Zo'
+            'Za'
         ],
         'dateFormat' => 'dd/mm/yy',
 

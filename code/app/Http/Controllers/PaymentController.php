@@ -63,7 +63,7 @@ class PaymentController extends Controller
         $paymentRequest->completed_payments = 0;
         $paymentRequest->activation_date = date( 'Y-m-d H:i:s' );
         if ( isset($request->activation_date) )  {
-            $paymentRequest->activation_date = date( 'Y-m-d H:i:s', strtotime($request->activation_date) ) ;
+            $paymentRequest->activation_date = date( 'Y-m-d H:i:s', strtotime(str_replace('/', '-',$request->activation_date)) ) ;
         }
 
         if ( $request->hasFile('image') ) {
@@ -96,7 +96,8 @@ class PaymentController extends Controller
             (
                 $paymentRequest['completed_payments'] >= $paymentRequest['possible_payments'] &&
                 $paymentRequest['possible_payments'] !== 0
-            )
+            ) || 
+            strtotime($paymentRequest['activation_date']) > strtotime('now') 
         ) {
             return abort(404);
         }
