@@ -66,7 +66,7 @@
                     <div class="card-footer {{ (strtotime( $request['activation_date']) > strtotime('now') ? 'text-danger font-weight-bold':'') }} ">
                         <?= URL::to('/pay/' . $request['id']); ?>
                         @if (strtotime( $request['activation_date']) > strtotime('now'))
-                            <span class="float-right text-muted font-weight-normal">{{ __('payment.AvailableAfter') }} {{ date('d/m/Y', strtotime( $request['activation_date'])) }} </span>
+                            <span class="float-right text-muted font-weight-normal">{{ __('payment.availableAfter') }} {{ date('d/m/Y', strtotime( $request['activation_date'])) }} </span>
                         @endif
                     </div>
                 </div>

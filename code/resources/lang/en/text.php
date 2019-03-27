@@ -44,5 +44,5 @@ return [
     'details' => 'Details',
 
     'date_format' => 'm/d/Y',
-
+    'back' => 'Back',
 ];

@@ -23,7 +23,6 @@ return [
     'sentjeOptional' => 'Optioneel',
     'AvailableAfter' => 'Beschikbaar na ',
 
-
     'success' => 'xx',
     'sentjeAdded' => 'xx',
     
@@ -34,6 +33,9 @@ return [
     'optionalData' => 'Optioneel, personaliseer je betaling.',
     'whoYouAre' => 'Wie je bent',
     'whereYouAre' => 'Waar je bent',
+    'availableAfter' => 'Beschikbaar op ',
+    'uSureDeleteRequest' => 'Weet je zeker dat je dit Sentje wilt verwijderen?',
+    'paymentRequestDelete' => 'Verwijder Sentje?',
 
     'datePicker' => [ 
         'closeText' => 'Sluit',

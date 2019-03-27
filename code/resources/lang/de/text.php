@@ -44,5 +44,6 @@ return [
     'details' => 'Einzelheiten',
 
     'date_format' => 'd/m/Y',
+    'back' => 'Zurück',
 
 ];
