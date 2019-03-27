@@ -13,7 +13,7 @@
                 <div class="form-group row">
                     <div class="col-lg-4 col-md-5">
                     <label>{{ __('payment.sentjeSelectBankAccount') }} *</label>
-                        <select class="browser-default custom-select" required> 
+                        <select name="IBAN" class="browser-default custom-select" required> 
                             @foreach ($accounts as $account)
                                 <option value="{{ $account['id'] }}">{{ decrypt($account['IBAN']) }}</option>
                             @endforeach

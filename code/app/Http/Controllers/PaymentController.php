@@ -35,6 +35,8 @@ class PaymentController extends Controller
             return abort(404);
         }
 
+        $account = \App\Account::find($paymentRequest['account_id']);
+
         $paymentResponses = \App\PaymentResponse::where([
             ['request_id', $paymentRequest->id],
             ['paid', true]
@@ -42,7 +44,8 @@ class PaymentController extends Controller
 
         return view('payment.view', [
             'request' => $paymentRequest,
-            'responses' => $paymentResponses
+            'responses' => $paymentResponses,
+            'account' => $account
         ]);
     }
 
@@ -53,6 +56,7 @@ class PaymentController extends Controller
         $paymentRequest->text = Sanitize::Input( $request->text );
         $paymentRequest->money_amount = Sanitize::Input( $request->money_amount );
         $paymentRequest->possible_payments = Sanitize::Input( $request->possible_payments );
+        $paymentRequest->account_id = Sanitize::Input( $request->IBAN );
 
         $paymentRequest->owner_id = auth()->user()->id;
         $paymentRequest->created_at = date( 'Y-m-d H:i:s' );

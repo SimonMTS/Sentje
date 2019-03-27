@@ -13,6 +13,7 @@ class payment_requestsTableSeeder extends Seeder
     {
         DB::table('payment_requests')->insert([
             'owner_id' => 1,
+            'account_id' => 1,
             'money_amount' => 10.30,
             'text' => 'voor de film',
             'possible_payments' => 5,

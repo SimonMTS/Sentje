@@ -60,21 +60,23 @@ $( document ).ready(function() {
     });
 
     $( function() {
-        var info = JSON.parse( $("#localization_info").val() );
+        if ( $("#localization_info").val() != null ) {
+            var info = JSON.parse( $("#localization_info").val() );
 
-        $( "#datepicker" ).datepicker({
-            minDate: new Date(),
-            closeText: info.closeText,
-            currentText: info.currentText,
-            monthNames: info.monthNames, 
-            monthNamesShort: info.monthNamesShort, 
-            dayNames: info.dayNames, 
-            dayNamesShort: info.dayNamesShort, 
-            dayNamesMin: info.dayNamesMin, 
-            dateFormat: info.dateFormat, 
-        });
-
-        $.datepicker.setDefaults($.datepicker.regional[ info.defaultRegional ])
+            $( "#datepicker" ).datepicker({
+                minDate: new Date(),
+                closeText: info.closeText,
+                currentText: info.currentText,
+                monthNames: info.monthNames, 
+                monthNamesShort: info.monthNamesShort, 
+                dayNames: info.dayNames, 
+                dayNamesShort: info.dayNamesShort, 
+                dayNamesMin: info.dayNamesMin, 
+                dateFormat: info.dateFormat, 
+            });
+    
+            $.datepicker.setDefaults($.datepicker.regional[ info.defaultRegional ])
+        }
     });
 
 });

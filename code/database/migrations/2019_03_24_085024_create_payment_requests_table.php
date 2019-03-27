@@ -16,14 +16,15 @@ class CreatePaymentRequestsTable extends Migration
         Schema::create('payment_requests', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('owner_id');
+            $table->integer('account_id');
             $table->double('money_amount');
             $table->string('text');
             $table->integer('possible_payments');
             $table->integer('completed_payments');
             $table->string('location');
-            $table->timestamps();
             $table->string('file_location');
             $table->timestamp('activation_date')->nullable();
+            $table->timestamps();
         });
     }
 
