@@ -45,4 +45,8 @@ return [
 
     'date_format' => 'm/d/Y',
     'back' => 'Back',
+
+    'copyTip' => 'Copy to clipboard',
+    'copyMsg' => 'Copied!',
+
 ];

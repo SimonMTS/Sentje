@@ -45,5 +45,8 @@ return [
 
     'date_format' => 'd/m/Y',
     'back' => 'Zurück',
+    
+    'copyTip' => 'in die Zwischenablage kopieren',
+    'copyMsg' => 'Kopiert!',
 
 ];

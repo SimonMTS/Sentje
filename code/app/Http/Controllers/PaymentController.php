@@ -54,7 +54,13 @@ class PaymentController extends Controller
         $paymentRequest = new \App\PaymentRequest;
 
         $paymentRequest->text = Sanitize::Input( $request->text );
-        $paymentRequest->money_amount = Sanitize::Input( $request->money_amount );
+        if ( $request->currency == 'dollar' ) {
+            $dollarAmount = Sanitize::Input( $request->money_amount );
+
+            $paymentRequest->money_amount = ConvertCurrency::USDtoEUR($dollarAmount);
+        } else {
+            $paymentRequest->money_amount = Sanitize::Input( $request->money_amount );
+        }
         $paymentRequest->possible_payments = Sanitize::Input( $request->possible_payments );
         $paymentRequest->account_id = Sanitize::Input( $request->IBAN );
 

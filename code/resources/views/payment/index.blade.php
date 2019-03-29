@@ -33,9 +33,10 @@
                         <label>{{ __('payment.sentjePrice') }} *</label>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <span class="input-group-text">
-                                    &euro;
-                                </span>
+                                <select class="custom-select rounded-0 rounded-left" name="currency">
+                                    <option value="euro"> &euro; Euro </option>
+                                    <option value="dollar"> &dollar; Dollar </option>
+                                </select>
                             </div>
                             <input name="money_amount" type="number" class="form-control" placeholder="{{ __('payment.sentjePriceExample') }}" min="0.01" step="0.01" required>
                         </div>

@@ -26,7 +26,16 @@
                     <div class="card-body">
                         <h6 class="card-subtitle mb-2 text-muted float-right">{{ date( __('text.date_format'), strtotime($request['created_at']) ) }}</h6>
                         <h5 class="card-title">{{ $request['text'] }}</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">&euro; {{ number_format( $request['money_amount'], 2 ) }}</h6>
+                        <?php
+                            if ( app()->getLocale() === 'us' ) {
+                                $dec_point = ".";
+                                $thousands_sep = ",";
+                            } else {
+                                $dec_point = ",";
+                                $thousands_sep = ".";
+                            }
+                        ?>  
+                        <h6 class="card-subtitle mb-2 text-muted">&euro; {{ number_format( $request['money_amount'], 2, $dec_point, $thousands_sep ) }}</h6>
                         @if($request['possible_payments'] === 0)
                             <p class="card-text">{{ $request['completed_payments'] }} {{ __('text.paid') }}</p>
                         @else
@@ -64,15 +73,23 @@
                         @endif
                     </div>
                     <div class="card-footer {{ (strtotime( $request['activation_date']) > strtotime('now') ? 'text-danger font-weight-bold':'') }} ">
-                        <?= URL::to('/pay/' . $request['id']); ?>
+                        <span id="copy-input{{ $loop->index }}" style="line-height: 37px;"><?= URL::to('/pay/' . $request['id']); ?></span>
                         @if (strtotime( $request['activation_date']) > strtotime('now'))
-                            <span class="float-right text-muted font-weight-normal">{{ __('payment.availableAfter') }} {{ date('d/m/Y', strtotime( $request['activation_date'])) }} </span>
+                            <span class="float-right text-muted font-weight-normal" style="line-height: 37px;">{{ __('payment.availableAfter') }} {{ date('d/m/Y', strtotime( $request['activation_date'])) }} </span>
+                        @else
+                            <button class="btn btn-secondary float-right" type="button" id="copy-button"
+                                data-toggle="tooltip" data-placement="top" title="{{ __('text.copyTip') }}"
+                                data-input="copy-input{{ $loop->index }}"
+                            >
+                                <i class="fas fa-copy"></i>
+                            </button>
                         @endif
                     </div>
                 </div>
 
             @endforeach
-
+            
+            <input type="hidden" id="copy-msg" value="{{ __('text.copyMsg') }}">
         </div>
     </div>
 </div>

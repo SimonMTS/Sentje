@@ -44,7 +44,9 @@ return [
     'details' => 'Details',
 
     'date_format' => 'd/m/Y',
-
     'back' => 'Terug',
+
+    'copyTip' => 'Kopieer naar klembord',
+    'copyMsg' => 'gekopieerd!',
 
 ];
