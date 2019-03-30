@@ -51,6 +51,15 @@ class PaymentController extends Controller
 
     public function addPOST( Request $request )
     {
+        $request->validate([
+            'text'              => 'required|max:255',
+            'currency'          => 'required|max:50',
+            'money_amount'      => 'required|max:50',
+            'possible_payments' => 'required|numeric|min:0|max:255',
+            'IBAN'              => 'required|max:50',
+            'activation_date'   => 'max:255'
+        ]);
+
         $paymentRequest = new \App\PaymentRequest;
 
         $paymentRequest->text = Sanitize::Input( $request->text );

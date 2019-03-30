@@ -25,8 +25,12 @@ class AccountsController extends Controller
 
     public function addPOST( Request $request )
     {
-        $account = new \App\Account;
+        $request->validate([
+            'IBAN' => 'required|max:255'
+        ]);
 
+        $account = new \App\Account;
+    
         $account->user_id = auth()->user()->id;
         if ( empty($request->IBAN) ) {
             return abort(404);
@@ -56,6 +60,10 @@ class AccountsController extends Controller
 
     public function editPOST( Request $request, $id )
     {
+        $request->validate([
+            'IBAN' => 'required|max:255'
+        ]);
+
         $id = Sanitize::Input( $id );
 
         $account = \App\Account::find($id);
