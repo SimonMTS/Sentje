@@ -50,6 +50,13 @@ class HomeController extends Controller
 
     public function profilePOST( Request $request, $id )
     {
+        $request->validate([
+            'name' => 'required|max:255',
+            'email' => 'required|max:255',
+            'password' => 'max:255',
+            'password_confirm' => 'max:255'
+        ]);
+
         $id = Sanitize::Input( $id );
 
         $user = \App\User::find($id);
