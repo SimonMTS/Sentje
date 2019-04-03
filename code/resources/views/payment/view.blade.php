@@ -17,7 +17,11 @@
                     <h5 class="card-title">{{ $request['text'] }}</h5>
                     <h6 class="card-subtitle mb-2 text-muted">&euro; {{ number_format( $request['money_amount'], 2 ) }}</h6>
                     <p class="card-text text-muted">{{ decrypt($account['IBAN']) }}</p>
-                    <p class="card-text">{{ $request['completed_payments'] }}/{{ $request['possible_payments'] }} {{ __('text.paid') }}</p>
+                    @if($request['possible_payments'] === 0)
+                        <p class="card-text">{{ $request['completed_payments'] }} {{ __('text.paid') }}</p>
+                    @else
+                        <p class="card-text">{{ $request['completed_payments'] }}/{{ $request['possible_payments'] }} {{ __('text.paid') }}</p>
+                    @endif
                 </div>
                 <ul class="list-group list-group-flush">
                     @foreach ($responses as $response)
