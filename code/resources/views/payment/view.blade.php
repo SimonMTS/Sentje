@@ -34,7 +34,7 @@
 
                             @if( json_decode($response['location_info']) != 'unknown' )
                                 <span class="card-text ml-2">
-                                {{ json_decode($response['location_info'])[1] }}/{{ json_decode($response['location_info'])[3] }}
+                                    {{ json_decode($response['location_info'])[1] }}/{{ json_decode($response['location_info'])[3] }}
                                 </span>
                             @endif
 
