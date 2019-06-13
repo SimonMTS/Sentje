@@ -79,9 +79,9 @@ $( document ).ready(function() {
         }
     });
 
-    $('#copy-button').tooltip();
+    $('.copy-button').tooltip();
 
-    $('#copy-button').bind('click', function() {
+    $('.copy-button').bind('click', function() {
 
         var el = $(this);
         var text = $( "#" + el.attr('data-input') ).text();

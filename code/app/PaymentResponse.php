@@ -11,4 +11,9 @@ class PaymentResponse extends Model
     public $timestamps = true;
 
 
+    public function request()
+    {
+        return $this->belongsTo('App\PaymentRequest');
+    }
+
 }

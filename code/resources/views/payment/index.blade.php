@@ -59,7 +59,7 @@
                 
                 <div class="row">
                     <div class="col-lg-4 col-md-5 mt-2">
-                        <label>{{ __('payment.sentjeUploadImage') }}</label>
+                        <label>{{ __('payment.sentjeUploadImage') }} <small class="text-muted">{{ __('payment.sentjeOptional') }}</small></label>
                     </div>
                     <div class="w-100"></div>
                     <div class="input-group col-lg-4 col-md-5 mt-2">
@@ -81,7 +81,7 @@
 
                 <div class="form-group row">
                     <div class="col-lg-4 col-md-5">
-                        <label>{{ __('payment.sentjeActivationDate') }}</label>
+                        <label>{{ __('payment.sentjeActivationDate') }} <small class="text-muted">{{ __('payment.sentjeOptional') }}</small></label>
                         <input name="activation_date" placeholder="{{ __('payment.sentjeActiveAfter') }}" type="text" class="form-control" id="datepicker" autocomplete="off">
 
                         <input type="hidden" id="localization_info" value="<?= htmlspecialchars(json_encode( __('payment.datePicker') )) ?>">

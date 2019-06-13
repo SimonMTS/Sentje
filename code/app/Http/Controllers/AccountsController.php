@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Sanitize;
+use Illuminate\Support\Facades\URL;
 
 class AccountsController extends Controller
 {
 
     public function index()
     {
-        $accounts = \App\Account::where('user_id', auth()->user()->id)->get();
+        $accounts = auth()->user()->accounts()->get();
 
         return view('accounts.index', [
             'accounts' => $accounts
@@ -40,7 +41,11 @@ class AccountsController extends Controller
         $account->save();
 
         $request->session()->flash('success', [__('text.success'), __('text.accountAdded')]);
-        return redirect('accounts');
+        if ( sizeof( auth()->user()->accounts()->get() ) > 1 ) {
+            return redirect('accounts');
+        } else {
+            return redirect('accounts')->with('info', '<b>Nu u een account heeft toegevoegd</b>, kunt u een Sentje <a href="'.URL::to('/payment').'">aanvragen</a>.');
+        }
     }
 
 

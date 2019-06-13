@@ -26,7 +26,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $PaymentRequests = \App\PaymentRequest::where('owner_id', auth()->user()->id)->orderBy('updated_at', 'desc')->get();
+        if ( sizeof( auth()->user()->accounts()->get() ) == 0 ) {
+            return redirect('accounts/add')->with('info', '<b>Om te beginnen</b>, moet u eerst een bankrekening toevoegen.');
+        }
+
+        $PaymentRequests = auth()->user()->requests()->orderBy('updated_at', 'desc')->get();
 
         return view('home', [
             'requests' => $PaymentRequests

@@ -16,7 +16,7 @@ class PaymentController extends Controller
 
     public function index()
     {
-        $accounts = \App\Account::where('user_id', auth()->user()->id)->get();
+        $accounts = auth()->user()->accounts()->get();
         if ( sizeof($accounts) === 0 ) {
             return redirect('accounts/add');
         }
@@ -35,17 +35,10 @@ class PaymentController extends Controller
             return abort(404);
         }
 
-        $account = \App\Account::find($paymentRequest['account_id']);
-
-        $paymentResponses = \App\PaymentResponse::where([
-            ['request_id', $paymentRequest->id],
-            ['paid', true]
-        ])->get();
-
         return view('payment.view', [
             'request' => $paymentRequest,
-            'responses' => $paymentResponses,
-            'account' => $account
+            'responses' => $paymentRequest->responses()->get(),
+            'account' => $paymentRequest->account()->first()
         ]);
     }
 
@@ -63,6 +56,7 @@ class PaymentController extends Controller
         $paymentRequest = new \App\PaymentRequest;
 
         $paymentRequest->text = Sanitize::Input( $request->text );
+
         if ( $request->currency == 'dollar' ) {
             $dollarAmount = Sanitize::Input( $request->money_amount );
 
@@ -70,6 +64,7 @@ class PaymentController extends Controller
         } else {
             $paymentRequest->money_amount = Sanitize::Input( $request->money_amount );
         }
+
         $paymentRequest->possible_payments = Sanitize::Input( $request->possible_payments );
         $paymentRequest->account_id = Sanitize::Input( $request->IBAN );
 
@@ -121,8 +116,7 @@ class PaymentController extends Controller
             return abort(404);
         }
         
-        $receiver = \App\User::find( $paymentRequest['owner_id'] );
-        
+        $receiver = $paymentRequest->owner;
         if ( !isset($receiver) ) {
             return abort(503);
         }
@@ -160,10 +154,10 @@ class PaymentController extends Controller
         
         if ( app()->getLocale() === 'us' ) {
             $currency = 'USD';
-            $money_amount = "".number_format( ConvertCurrency::EURtoUSD($paymentRequest['money_amount']), 2 );
+            $money_amount = "".number_format( ConvertCurrency::EURtoUSD($paymentRequest['money_amount']), 2, '.', '' );
         } else {
             $currency = 'EUR';
-            $money_amount = "".number_format( $paymentRequest['money_amount'], 2 );
+            $money_amount = "".number_format( $paymentRequest['money_amount'], 2, '.', '' );
         }
         
         $paymentResponse = new \App\PaymentResponse;
@@ -204,8 +198,7 @@ class PaymentController extends Controller
             return abort(404);
         }
 
-        $paymentRequest = \App\PaymentRequest::find($paymentResponse['request_id']);
-
+        $paymentRequest = $paymentResponse->request()->first();
         if ( !isset($paymentRequest) ) {
             return abort(503);
         }
@@ -247,13 +240,12 @@ class PaymentController extends Controller
             return abort(404);
         }
 
-        $paymentRequest = \App\PaymentRequest::find($paymentResponse['request_id']);
-
+        $paymentRequest = $paymentResponse->request()->first();
         if ( !isset($paymentRequest) ) {
             return abort(503);
         }
 
-        $receiver = \App\User::find( $paymentRequest['owner_id'] );
+        $receiver = $paymentRequest->owner()->first();
         if ( !isset($receiver) ) {
             return abort(503);
         }

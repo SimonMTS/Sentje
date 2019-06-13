@@ -77,7 +77,7 @@
                         @if (strtotime( $request['activation_date']) > strtotime('now'))
                             <span class="float-right text-muted font-weight-normal" style="line-height: 37px;">{{ __('payment.availableAfter') }} {{ date('d/m/Y', strtotime( $request['activation_date'])) }} </span>
                         @else
-                            <button class="btn btn-secondary float-right" type="button" id="copy-button"
+                            <button class="btn btn-secondary float-right copy-button" type="button"
                                 data-toggle="tooltip" data-placement="top" title="{{ __('text.copyTip') }}"
                                 data-input="copy-input{{ $loop->index }}"
                             >

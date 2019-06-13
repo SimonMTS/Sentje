@@ -16,4 +16,19 @@ class PaymentRequest extends Model
     public $timestamps = true;
 
 
+    public function owner()
+    {
+        return $this->belongsTo('App\User');
+    }
+
+    public function account()
+    {
+        return $this->belongsTo('App\Account');
+    }
+
+    public function responses()
+    {
+        return $this->hasMany('App\PaymentResponse', 'request_id');
+    }
+
 }

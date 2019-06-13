@@ -14,6 +14,15 @@
                 </div>
             @endif
 
+            @if (\Session::has('info'))
+                <div class="alert alert-info mt-3 alert-dismissible fade show">
+                    {!! \Session::get('info') !!}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                    </button>
+                </div>
+            @endif
+
             <h1 class="display-4">{{ __('text.myBankAccounts') }}</h1>
             <p class="lead">{{ Auth::user()->name }}</p>
 

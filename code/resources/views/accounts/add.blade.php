@@ -7,6 +7,12 @@
 
             <h1 class="display-4 mb-5">{{ __('text.bankAccountAdd') }}</h1>
 
+            @if (\Session::has('info'))
+                <div class="alert alert-info mt-3">
+                    {!! \Session::get('info') !!}
+                </div>
+            @endif
+
             <form method="POST" action="<?= URL::to('/accounts/add'); ?>" class="ibanform" novalidate>
                 @csrf
 
