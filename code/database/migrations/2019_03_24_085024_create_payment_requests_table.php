@@ -19,8 +19,8 @@ class CreatePaymentRequestsTable extends Migration
             $table->integer('account_id');
             $table->double('money_amount');
             $table->string('text');
-            $table->integer('possible_payments');
-            $table->integer('completed_payments');
+            $table->bigInteger('possible_payments');
+            $table->bigInteger('completed_payments');
             $table->string('location');
             $table->string('file_location');
             $table->timestamp('activation_date')->nullable();

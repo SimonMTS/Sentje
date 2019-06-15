@@ -30,9 +30,11 @@
                             if ( app()->getLocale() === 'us' ) {
                                 $dec_point = ".";
                                 $thousands_sep = ",";
+                                $dateFormat = 'm/d/Y';
                             } else {
                                 $dec_point = ",";
                                 $thousands_sep = ".";
+                                $dateFormat = 'd/m/Y';
                             }
                         ?>  
                         <h6 class="card-subtitle mb-2 text-muted">&euro; {{ number_format( $request['money_amount'], 2, $dec_point, $thousands_sep ) }}</h6>
@@ -75,7 +77,7 @@
                     <div class="card-footer {{ (strtotime( $request['activation_date']) > strtotime('now') ? 'text-danger font-weight-bold':'') }} ">
                         <span id="copy-input{{ $loop->index }}" style="line-height: 37px;"><?= URL::to('/pay/' . $request['id']); ?></span>
                         @if (strtotime( $request['activation_date']) > strtotime('now'))
-                            <span class="float-right text-muted font-weight-normal" style="line-height: 37px;">{{ __('payment.availableAfter') }} {{ date('d/m/Y', strtotime( $request['activation_date'])) }} </span>
+                            <span class="float-right text-muted font-weight-normal" style="line-height: 37px;">{{ __('payment.availableAfter') }} {{ date($dateFormat, strtotime( $request['activation_date'])) }} </span>
                         @else
                             <button class="btn btn-secondary float-right copy-button" type="button"
                                 data-toggle="tooltip" data-placement="top" title="{{ __('text.copyTip') }}"

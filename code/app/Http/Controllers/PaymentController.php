@@ -10,6 +10,7 @@ use App\Http\ConvertCurrency;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
+use Config;
 
 class PaymentController extends Controller
 {
@@ -48,7 +49,7 @@ class PaymentController extends Controller
             'text'              => 'required|max:255',
             'currency'          => 'required|max:50',
             'money_amount'      => 'required|max:50',
-            'possible_payments' => 'required|numeric|min:0|max:255',
+            'possible_payments' => 'required|numeric|min:0|max:1000000000000000000',
             'IBAN'              => 'required|max:50',
             'activation_date'   => 'max:255'
         ]);
@@ -75,9 +76,14 @@ class PaymentController extends Controller
         $paymentRequest->location = '';
         $paymentRequest->file_location = '';
         $paymentRequest->completed_payments = 0;
+        
         $paymentRequest->activation_date = date( 'Y-m-d H:i:s' );
-        if ( isset($request->activation_date) )  {
-            $paymentRequest->activation_date = date( 'Y-m-d H:i:s', strtotime(str_replace('/', '-',$request->activation_date)) ) ;
+        if ( isset($request->activation_date) && Config::get('app.locale') == 'us' )  {
+            $date = $request->activation_date;
+            $paymentRequest->activation_date = date( 'Y-m-d H:i:s', strtotime($date) );
+        } elseif ( isset($request->activation_date) && Config::get('app.locale') != 'us' ) {
+            $date = \DateTime::createFromFormat('d/m/Y',$request->activation_date)->format('m/d/Y');
+            $paymentRequest->activation_date = date( 'Y-m-d H:i:s', strtotime($date) );
         }
 
         if ( $request->hasFile('image') ) {
