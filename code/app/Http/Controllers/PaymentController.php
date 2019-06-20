@@ -78,13 +78,18 @@ class PaymentController extends Controller
         $paymentRequest->completed_payments = 0;
         
         $paymentRequest->activation_date = date( 'Y-m-d H:i:s' );
-        if ( isset($request->activation_date) && Config::get('app.locale') == 'us' )  {
-            $date = $request->activation_date;
-            $paymentRequest->activation_date = date( 'Y-m-d H:i:s', strtotime($date) );
-        } elseif ( isset($request->activation_date) && Config::get('app.locale') != 'us' ) {
-            $date = \DateTime::createFromFormat('d/m/Y',$request->activation_date)->format('m/d/Y');
-            $paymentRequest->activation_date = date( 'Y-m-d H:i:s', strtotime($date) );
+        try {
+            if ( isset($request->activation_date) && Config::get('app.locale') == 'us' )  {
+                $date = $request->activation_date;
+                $paymentRequest->activation_date = date( 'Y-m-d H:i:s', strtotime($date) );
+            } elseif ( isset($request->activation_date) && Config::get('app.locale') != 'us' ) {
+                $date = \DateTime::createFromFormat('d/m/Y',$request->activation_date)->format('m/d/Y');
+                $paymentRequest->activation_date = date( 'Y-m-d H:i:s', strtotime($date) );
+            }
+        } catch ( \Throwable $e ) {
+            return redirect('payment');
         }
+        
 
         if ( $request->hasFile('image') ) {
            request()->validate([
